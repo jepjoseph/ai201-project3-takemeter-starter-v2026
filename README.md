@@ -67,31 +67,32 @@ TakeMeter is a text-classification project using public posts from [r/learnprogr
 
 ---
 ## Label Taxonomy
-<!-- Each label: a one-sentence definition and two real examples from your
 
-     reading. Then your decision rule for the hardest boundary.
+The classifier evaluates the amount of relevant supporting context in each post's title and body. Every post receives exactly one of the following three labels. The examples below are the selected candidate posts documented in `research/milestone2_taxonomy.md`; their descriptions should be checked against the original Reddit posts before final submission.
 
-     The decision rule is worth a point on its own and it's the thing most
+### `low_context`
 
-     people leave out. Every taxonomy has a hardest boundary. Name yours. -->
+**Definition:** A post that states a question, opinion, or experience but gives no meaningful explanation or supporting background.
 
-**Current status (Milestone 1):** The final labels have not yet been defined. Research identified three overlapping candidate distinctions: technical specificity, post purpose, and supporting context. These are observations, **not** three classification labels. See [Milestone 1 observations](research/milestone1_observations.md) for the 30-post reading log and examples.
+**Example 1 — Python versus JavaScript:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1t3f1fi/). The author questions why Python is recommended for beginners when React appears in job listings, without providing meaningful details about their own career goals or circumstances.
 
-### `label_one`
-**Definition:**
-**Example 1:**
->
+**Example 2 — Choosing a first programming language:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/vli5zb/). The author asks which language would make it easier to learn other languages, without describing their experience or intended applications.
 
-**Example 2:**
->
+### `some_context`
 
-### `label_two`
-**Definition:**
-**Example 1:**
->
+**Definition:** A post that provides relevant background, a specific topic, or a previous difficulty but does not sufficiently develop the central situation.
 
-**Example 2:**
->
+**Example 1 — Learning Git from scratch:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1wlmea9/). The author identifies themselves as a beginner and requests Git learning resources, but does not describe a specific Git task or attempt.
+
+**Example 2 — Understanding C++ pointers:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1hla3ri/). The author identifies pointers as confusing and mentions previous attempts to understand them, but provides no code example or concrete use case.
+
+### `detailed_context`
+
+**Definition:** A post that includes multiple concrete, relevant details that work together to explain the author's problem, experience, or argument.
+
+**Example 1 — Python versus JavaScript:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1qc5q4r/). The author describes office and data-related work, prior web-development learning, interests, and reasons for considering Python.
+
+**Example 2 — Learning software design:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1s4cvsb/). The author explains their Python and C++ knowledge, experience with small scripts, and difficulties structuring larger projects.
 
 ### The hardest boundary
 **Which two labels:**
