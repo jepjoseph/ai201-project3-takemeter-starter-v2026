@@ -11,8 +11,9 @@ opinion. *"Every label has an F1 of at least 0.60 on the held-out set"* is a
 criterion.
 
 Under each, write a sentence or two on **why that number**. A reason that says
-something about your data or your taxonomy earns credit — *"I picked 0.60 F1
-for `reaction` because it's my smallest label and I only have about 50
+something about your data or your taxonomy earns credit — *"For example, a target for `some_context` should account for
+the difficulty of distinguishing partially explained questions
+from questions containing detailed supporting evidence. and I only have about 50
 examples of it"*. A reason that could be attached to any project does not.
 
 > Missing your own targets next unit costs you nothing. Setting a target so
@@ -83,9 +84,9 @@ No single label may account for **more than 60%** of the complete labeled datase
 
 ## 4. Independent labeling consistency
 
-Two people independently applying the TakeMeter taxonomy to the **same 20 Reddit posts** must agree on at least **75%** of their labels (**15 of 20 posts**).
+Two people independently applying the TakeMeter taxonomy to the same 20 Stack Overflow questions must agree on at least **75%** of their labels (**15 of 20 questions**).
 
-**Why this target:** I chose 75% because the distinction between `some_context` and `detailed_context` involves judgment even with a written boundary rule. Agreement on at least three out of four posts would show that another person can apply the taxonomy reasonably consistently while leaving room for difficult cases.
+**Why this target:** I chose 75% because the distinction between `some_context` and `detailed_context` involves judgment even with a written boundary rule. Agreement on at least three out of four questions would show that another person can apply the taxonomy reasonably consistently while leaving room for difficult cases.
 
 **How to check:** Select and record the 20 post IDs before comparing labels. Each person labels the same title and body independently, using `low_context`, `some_context`, or `detailed_context` and the same decision rules. Count exact matches and divide by 20. The separate Unit 6 staff-taxonomy exercise does not measure this criterion.
 
