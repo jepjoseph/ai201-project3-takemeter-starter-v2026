@@ -104,15 +104,43 @@ These three recorded labels were checked against the reviewed dataset. They illu
 
 ## The Training Run
 
-<!-- Record actual notebook results here; do not treat a failed run as completed training. -->
+**Base model:** `distilbert-base-uncased` (DistilBERT), fine-tuned to classify Stack Overflow questions into three context levels: `low_context`, `some_context`, and `detailed_context`.
 
-**Base model:** `distilbert-base-uncased` (identified in the notebook's previous model-loading output; verify the current `BASE_MODEL` configuration when running training).
+**Training device:** CPU, using PyTorch `2.14.1+cpu`. The training completed in approximately 68 seconds.
 
-**Settings:** Pending a successful training run. Record the actual epochs, learning rate, batch size, random seed, and any other settings from `takemeter.ipynb`.
+**Settings:**
 
-**Anything I changed from the defaults, and why:** I updated the `LABELS` configuration from the starter labels to `low_context`, `some_context`, and `detailed_context` so that the model's class names match the Stack Overflow dataset. Other training-setting changes, if any, will be recorded after verification.
+- Random seed: `42`
+- Number of epochs: `3`
+- Learning rate: `2e-5`
+- Training batch size: `16`
+- Evaluation batch size: `16`
+- Maximum sequence length: `128` tokens
 
-**Split sizes:** The last notebook output showed 139 training, 31 validation, and 30 test examples (200 total). That output was produced before the corrected label configuration was rerun, so the per-label split counts and final split must be verified in the notebook before being reported as final.
+**Anything I changed from the defaults, and why:** I replaced the starter label configuration (`analysis`, `hot_take`, `reaction`) with `low_context`, `some_context`, and `detailed_context` to match the labels in my Stack Overflow dataset. I kept the default training hyperparameters: three epochs, learning rate `2e-5`, batch size `16`, and random seed `42`.
+
+**Split sizes:** The 200 labeled Stack Overflow questions were divided into 139 training examples, 31 validation examples, and 30 test examples.
+
+| Label              | Training | Validation |   Test |
+| ------------------ | -------: | ---------: | -----: |
+| `low_context`      |        7 |          1 |      2 |
+| `some_context`     |       35 |          8 |      7 |
+| `detailed_context` |       97 |         22 |     21 |
+| **Total**          |  **139** |     **31** | **30** |
+
+**Training results:** The model successfully completed all three epochs. Final validation accuracy was 70.97%, with a macro F1 score of 0.2767. Validation loss decreased from 0.794938 in epoch 1 to 0.697430 in epoch 3.
+
+**Held-out test results:** The trained model achieved 70.0% accuracy and a macro F1 score of 0.275 on the 30 test questions.
+
+| Label              | Test examples | F1 score |
+| ------------------ | ------------: | -------: |
+| `low_context`      |             2 |    0.000 |
+| `some_context`     |             7 |    0.000 |
+| `detailed_context` |            21 |    0.824 |
+
+**Observations and limitations:** The model's results suggest that it strongly favors the majority class, `detailed_context`. The test split contains only two `low_context` examples and seven `some_context` examples, so their evaluation metrics are sensitive to individual predictions. These limitations will be investigated further in Unit 6.
+
+**Saved results:** Section 5 of `takemeter.ipynb` successfully generated `results.json` and `test_split.csv`. These files preserve the training evaluation evidence and held-out test data for the next unit.
 
 ---
 
