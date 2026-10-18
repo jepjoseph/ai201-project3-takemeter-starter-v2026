@@ -1,5 +1,9 @@
 # TakeMeter
 
+**Author:** Jean Pierre Joseph  
+**Course:** CodePath AI201  
+**Project:** TakeMeter — Stack Overflow Question Context Classifier
+
 > ### 👋 Start here
 >
 > **New to this repo? Read [RUNNING.md](RUNNING.md) first** — setup, the notebook, the baseline, and what to do when something breaks.
@@ -33,7 +37,7 @@
 
 TakeMeter is a text-classification project using public programming questions collected from Stack Overflow through the Stack Exchange API. It categorizes questions by the richness of relevant supporting context in their titles and bodies.
 
-An initial exploration of 30 questions identified four useful distinctions: problem specificity, technical evidence, troubleshooting history, and environment or constraints. The three labels are `low_context`, `some_context`, and `detailed_context`. A reviewed dataset of 200 questions is prepared. Training and evaluation results will be documented after they are successfully run and verified.
+An initial exploration of 30 questions identified four useful distinctions: problem specificity, technical evidence, troubleshooting history, and environment or constraints. The three labels are `low_context`, `some_context`, and `detailed_context`. A reviewed dataset of 200 Stack Overflow questions was used to fine-tune a DistilBERT classifier. The model was trained and evaluated on a held-out test set of 30 questions, achieving 70.0% accuracy and a macro F1 score of 0.275. The evaluation also revealed that the model predicted `detailed_context` for every test question, highlighting a limitation caused by its preference for the majority class.
 
 ---
 
@@ -90,7 +94,7 @@ The classifier evaluates the amount of relevant supporting context in each Stack
 | `detailed_context` |     140 |      70% |
 | **Total**          | **200** | **100%** |
 
-The largest class is 70%, meeting the Unit 5 dataset-balance limit. This is a dataset statistic, not a trained-model evaluation result.
+The largest class, `detailed_context`, represents 70% of the dataset. This satisfies the Unit 5 requirement that no label exceed 70%, but it does not meet my stricter acceptance criterion of 60% maximum representation. This imbalance is an important limitation to investigate during Unit 6. This is a dataset statistic, not a trained-model evaluation result.
 
 **Three borderline labeling cases:**
 
