@@ -51,63 +51,53 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Overall classification accuracy
 
-<!-- Your criterion. It must name a number. -->
+The classifier must achieve at least **65% overall accuracy** on the held-out test set for **each of the three training seeds**.
 
+**Why this target:** I chose 65% because the classifier distinguishes three levels of supporting context, and posts near the `some_context` / `detailed_context` boundary can be difficult to separate. I consider 65% a useful target for a small, three-label dataset without expecting every borderline case to be classified correctly.
 
-
-**Why this target:**
-
-
+**How to check:** For each seed, divide correctly predicted held-out posts by the total number of held-out posts. Each seed must reach at least 0.65.
 
 ---
 
-## 2.
+## 2. Minimum F1 for every label
 
-<!-- Your criterion. -->
+Each label — `low_context`, `some_context`, and `detailed_context` — must achieve an **F1 score of at least 0.55** on the held-out test set for **each of the three training seeds**.
 
+**Why this target:** I chose 0.55 because distinguishing `some_context` from `detailed_context` can be ambiguous, and the planned dataset of approximately 200 posts may leave relatively few test examples per label. I still want acceptable performance for every context level, rather than good overall accuracy driven by only one label.
 
-
-**Why this target:**
-
-
+**How to check:** Calculate F1 separately for each of the three labels for each seed. All nine label-by-seed scores must be at least 0.55.
 
 ---
 
-## 3.
+## 3. Dataset label balance
 
-<!-- Your criterion. -->
+No single label may account for **more than 60%** of the complete labeled dataset in `labels.csv`.
 
+**Why this target:** I chose 60% so all three context levels are represented without one category dominating the examples used for training. This also sets a stricter balance limit than the assignment's 70% maximum.
 
-
-**Why this target:**
-
-
+**How to check:** For each label, divide its row count in `labels.csv` by the total number of labeled rows. The largest share must be at most 0.60.
 
 ---
 
-## 4.
+## 4. Independent labeling consistency
 
-<!-- Your criterion. -->
+Two people independently applying the TakeMeter taxonomy to the **same 20 Reddit posts** must agree on at least **75%** of their labels (**15 of 20 posts**).
 
+**Why this target:** I chose 75% because the distinction between `some_context` and `detailed_context` involves judgment even with a written boundary rule. Agreement on at least three out of four posts would show that another person can apply the taxonomy reasonably consistently while leaving room for difficult cases.
 
-
-**Why this target:**
-
-
+**How to check:** Select and record the 20 post IDs before comparing labels. Each person labels the same title and body independently, using `low_context`, `some_context`, or `detailed_context` and the same decision rules. Count exact matches and divide by 20. The separate Unit 6 staff-taxonomy exercise does not measure this criterion.
 
 ---
 
-## 5.
+## 5. Accuracy of high-confidence predictions
 
-<!-- Your criterion. -->
+For **each of the three training seeds**, held-out test predictions whose **highest predicted class probability is at least 0.80 (80%)** must achieve **at least 75% accuracy** among those qualifying predictions.
 
+**Why this target:** I chose 80% as the cutoff to focus on predictions the model considers relatively certain. I chose 75% accuracy because those predictions should be more reliable than the 65% overall accuracy target, even though borderline supporting-context posts can remain difficult.
 
-
-**Why this target:**
-
-
+**How to check:** For each seed, take the maximum predicted probability across the three labels for each held-out post. Filter predictions with maximum probability >= 0.80, then divide the number correctly classified by the number qualifying. Record both counts. If zero predictions qualify for a seed, mark this criterion **not met / not evaluable for that seed**, never as passed; the criterion is met only if all three seeds have qualifying predictions and each qualifying subset reaches 0.75 accuracy.
 
 ---
 
@@ -118,25 +108,25 @@ whether you hit them:
      revise it, and that earns credit. But never delete or edit the original
      line. Add the revision underneath, like this:
 
-         ## 2. Every label performs acceptably
+        ## 2. Every label performs acceptably
 
-         The model performs well on all labels.
+        The model performs well on all labels.
 
-         **Why this target:** ...
+        **Why this target:** ...
 
-         > **Revised in unit 6:** Every label has an F1 of at least 0.60 on
-         > the held-out set.
-         >
-         > **Why revised:** "performs well" gave me nothing to check. I
-         > couldn't produce a verdict from it at all.
+        > **Revised in unit 6:** Every label has an F1 of at least 0.60 on
+        > the held-out set.
+        >
+        > **Why revised:** "performs well" gave me nothing to check. I
+        > couldn't produce a verdict from it at all.
 
      That's a revision because the criterion couldn't be MEASURED.
 
      Lowering a target because you missed it is not a revision, and it costs
      you the point:
 
-         ✗ "Overall accuracy of at least 0.65" → "at least 0.55", because
-            0.65 turned out to be optimistic for 200 examples.
+        ✗ "Overall accuracy of at least 0.65" → "at least 0.55", because
+          0.65 turned out to be optimistic for 200 examples.
 
      A number you missed stays where it is, gets diagnosed, and gets a fix
      attempted. That's where the points are.
