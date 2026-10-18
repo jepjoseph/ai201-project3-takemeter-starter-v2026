@@ -70,38 +70,37 @@ The initial community exploration examines 30 questions and identifies four cand
 ---
 ## Label Taxonomy
 
-The classifier evaluates the amount of relevant supporting context in each post's title and body. Every post receives exactly one of the following three labels. The examples below are the selected candidate posts documented in `research/milestone2_taxonomy.md`; their descriptions should be checked against the original Reddit posts before final submission.
+The classifier evaluates the amount of relevant supporting context in each Stack Overflow question's title and body. Every question receives exactly one of the following three labels.
 
 ### `low_context`
 
 **Definition:** A post that states a question, opinion, or experience but gives no meaningful explanation or supporting background.
 
-**Example 1 — Python versus JavaScript:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1t3f1fi/). The author questions why Python is recommended for beginners when React appears in job listings, without providing meaningful details about their own career goals or circumstances.
+**Example 1 — Python command usage:** [Stack Overflow question](https://stackoverflow.com/questions/80010880/python-general-usage). The author asks about the difference between `python` and `python3`, providing little additional background beyond the Python version and command.
 
-**Example 2 — Choosing a first programming language:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/vli5zb/). The author asks which language would make it easier to learn other languages, without describing their experience or intended applications.
+**Example 2 — Blockchain development:** [Stack Overflow question](https://stackoverflow.com/questions/80010744/how-to-quickly-transition-into-blockchain-development). This is a candidate example; its complete body still needs to be checked before confirming the label.
 
 ### `some_context`
 
 **Definition:** A post that provides relevant background, a specific topic, or a previous difficulty but does not sufficiently develop the central situation.
 
-**Example 1 — Learning Git from scratch:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1wlmea9/). The author identifies themselves as a beginner and requests Git learning resources, but does not describe a specific Git task or attempt.
+**Example 1 — Ansys Fluent to Mechanical:** [Stack Overflow question](https://stackoverflow.com/questions/80010854/data-transfer-from-ansys-fluent-to-ansys-mechanical). The author describes 100 data files, the intended time-step conversion, and attempted import approaches, but does not fully explain the results of those attempts.
 
-**Example 2 — Understanding C++ pointers:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1hla3ri/). The author identifies pointers as confusing and mentions previous attempts to understand them, but provides no code example or concrete use case.
+**Example 2 — SwiftUI TabView:** [Stack Overflow question](https://stackoverflow.com/questions/80010879/how-to-keep-tabs-when-applying-tabviewstyle-page). The author describes disappearing tabs after applying `.tabViewStyle(.page)` and includes a code example, but gives limited additional diagnostic information.
 
 ### `detailed_context`
 
 **Definition:** A post that includes multiple concrete, relevant details that work together to explain the author's problem, experience, or argument.
 
-**Example 1 — Python versus JavaScript:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1qc5q4r/). The author describes office and data-related work, prior web-development learning, interests, and reasons for considering Python.
+**Example 1 — vcpkg packaging failure:** [Stack Overflow question](https://stackoverflow.com/questions/80010870/publish-package-for-distribution-via-vcpkg-fails-due-to-missing-debug-share). The author provides the failing command, error output, project directory structure, and relevant configuration.
 
-**Example 2 — Learning software design:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1s4cvsb/). The author explains their Python and C++ knowledge, experience with small scripts, and difficulties structuring larger projects.
+**Example 2 — SystemVerilog simulator discrepancy:** [Stack Overflow question](https://stackoverflow.com/questions/80010865/why-does-xcelium-throw-a-hierarchical-name-error-on-a-module-parameter). The author provides code examples, the exact error message, and differences between three simulators.
 
 ### The hardest boundary
-**Which two labels:**
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
 
-     if the tone is heated." -->
+**Which two labels:** `some_context` and `detailed_context`.
+
+**The decision rule I used every time:** If multiple concrete, relevant details work together to explain the situation, choose `detailed_context`. If the post contains useful background but does not sufficiently develop the situation, choose `some_context`. Length alone does not determine the label.
 
 ---
 ## The Dataset
@@ -109,7 +108,7 @@ The classifier evaluates the amount of relevant supporting context in each post'
 
      cases. -->
 
-**Where the posts came from:** Public posts in [r/learnprogramming](https://www.reddit.com/r/learnprogramming/). The initial research log records 30 post URLs in `research/milestone1_observations.md`; this is not yet the labeled training dataset.
+**Where the posts came from:** Public programming questions from [Stack Overflow](https://stackoverflow.com/questions), collected using the Stack Exchange API with question bodies included. The raw collection contains 200 records, with 200 unique question IDs and 200 nonempty bodies. The classifier will use each question's title and body. The research sample contains 30 questions; the labeled training dataset has not yet been completed.
 **How I labelled them:** Not started. The label taxonomy will be defined first; the initial 20 training examples must be labeled independently before any optional AI-assisted pre-labeling. <!-- Cold first? Pre-labelled with AI and corrected?
 
 Say so plainly — the disclosure is required, not penalised. -->
@@ -187,9 +186,9 @@ of next unit's variance. -->
 
 **Moment 1 — Community research and documentation**
 
-- **What I asked for:** Help finding the top candidate posts from r/learnprogramming. 
-- **What came back:** A research-log format, candidate distinctions, post URLs, and suggested summaries.
-- **What I changed:** Compiled the research document with 30 entries, supporting examples, ambiguous cases, and conclusions. I must still independently verify the posts and observations before treating them as confirmed research.
+- **What I asked for:** Help me choosing a permitted public community after Reddit API access failed, and revising the research and taxonomy for Stack Overflow. Help finding the top candidate posts from Stack Overflow. 
+- **What came back:** Guidance on the assignment requirements, PowerShell commands to inspect the Stack Overflow dataset, and proposed research distinctions and taxonomy examples.
+- **What I changed:** Collected 200 Stack Overflow questions using the Stack Exchange API, verified their IDs and nonempty bodies, and began replacing Reddit-specific research with Stack Overflow examples. Independent verification and final labeling decisions remain to be completed.
 
 **Moment 2 — README preparation**
 
