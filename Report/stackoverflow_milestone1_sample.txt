@@ -1,0 +1,1587 @@
+﻿
+
+question_id : 80010912
+title       : ExpressionChangedAfterItHasBeenCheckedError occures in Angular by accessing properties of DOM elements
+link        : https://stackoverflow.com/questions/80010912/expressionchangedafterithasbeencheckederror-occures-in-angular-by-accessing-prop
+tags        : {angular, exception, dom, properties}
+body        : <p>I have a problem, when I'm trying to read a CSS class of some DOM elements. Here is what I want to achieve: when someone clicks the button &quot;<strong>Click Me</strong>&quot; the CSS class <code>modified</code> should be added to one or more labels (currently only to 1 label is 
+              added, but in the real code there are more label that is added to). At the same time, right from the text &quot;<strong>State:</strong>&quot; it should be displayed <code>true</code> if at least one label has the class <code>modified</code>, or <code>false</code> otherwise.</p>
+              <p>This isn't working yet, because the first time &quot;<strong>Click Me</strong>&quot; is clicked, nothing happens, and an Exception <code>ExpressionChangedAfterItHasBeenCheckedError</code> appears in the console.<br />
+              But after that it works, even though the Exception is still showing in the console.</p>
+              <p>I found that, in such cases, one should delay the change detection of Angular. I tried using <code>debounceTime()</code> and <code>setTimeout()</code>, but that didn't solve the problem.</p>
+              <p>Here is the <a href="https://stackblitz.com/edit/perko-async-pipe-boolean-gx3rcwrz?file=src%2Fapp%2Finfo.component.ts" rel="nofollow noreferrer">code</a>.</p>
+              <p>Could you please help me to fix this?</p>
+              <p>Thanks in advance.</p>
+              
+
+question_id : 80010900
+title       : How do I compute operating thresholds for FAR=0% when evaluating biometric match scores in Python/MATLAB?
+link        : https://stackoverflow.com/questions/80010900/how-do-i-compute-operating-thresholds-for-far-0-when-evaluating-biometric-match
+tags        : {python, numpy, computer-vision, biometrics...}
+body        : <p>I am evaluating a biometric verification system using standard similarity match scores for genuine and impostor comparison distributions.</p>
+              <p>I need to compute the operational decision threshold corresponding to a <strong>False Acceptance Rate (FAR) of 0%</strong> ($\text{FAR} = 0\%$), where no impostor scores exceed the threshold.</p>
+              <p>Given two 1D NumPy arrays of match scores—<code>genuine_scores</code> and <code>impostor_scores</code>—how can I algorithmically calculate this strict threshold and extract the corresponding <strong>False Rejection Rate (FRR)</strong> at this zero-FAR operating point in Python?</p>
+              <p><strong>Sample Data Setup:</strong></p>
+              <pre class="lang-py prettyprint-override"><code>import numpy as np
+              
+              # Simulated match scores (higher score = higher similarity)
+              np.random.seed(42)
+              genuine_scores = np.random.normal(loc=0.8, scale=0.1, size=1000)
+              impostor_scores = np.random.normal(loc=0.3, scale=0.1, size=1000)
+              </code></pre>
+              
+
+question_id : 80010880
+title       : Python - General usage
+link        : https://stackoverflow.com/questions/80010880/python-general-usage
+tags        : {python}
+body        : <p>I just downloaded Python v3.13.15.
+              I execute my scripts with command line
+              <code>python script.py</code>. What's the use of <code>python3</code> instead of <code>python</code> in command lines?</p>
+              
+
+question_id : 80010879
+title       : How to keep Tabs when applying .tabViewStyle(.page)?
+link        : https://stackoverflow.com/questions/80010879/how-to-keep-tabs-when-applying-tabviewstyle-page
+tags        : {best-practices, swiftui, swiftui-tabview}
+body        : <p>I'm trying to create a TabView that has pagination, but when I apply .tabViewStyle(.page) modifier the tabs just disappear, how can I fix it?</p>
+              <pre><code>TabView(selection: $tab) {
+                          Tab(&quot;Deep&quot;, systemImage: &quot;play&quot;, value: .deep) {
+                               DeepView()
+                          }
+                          
+                          Tab(&quot;Couple&quot;, systemImage: &quot;play&quot;, value: .deep) {
+                               CoupleView()
+                          }
+                          
+                          Tab(&quot;Gossip&quot;, systemImage: &quot;play&quot;, value: .deep) {
+                               GossipView()
+                          }
+                      }
+                      .tabViewStyle(.page)
+              </code></pre>
+              
+
+question_id : 80010878
+title       : Nasm : how do I get rid of segmentation fault (core dumped)?
+link        : https://stackoverflow.com/questions/80010878/nasm-how-do-i-get-rid-of-segmentation-fault-core-dumped
+tags        : {assembly, x86-64, nasm}
+body        : <p>I was trying to &quot;mess around&quot; with the CMP instruction NASM and then I was faced with</p>
+              <blockquote>
+              <p>Segmentation fault         (core dumped) ./cmp_jmp</p>
+              </blockquote>
+              <p>I don't know what to specify besides that I am using a linux (which is a kernel that some operating systems are based off) distro (the operating system) remarked as u-bunt-u (the operating system x2) and that my code is:</p>
+              <pre><code>BITS    64
+              
+              .data:
+                  Hi db &quot;hi&quot;, 0X0A
+                  Hello db &quot;hello&quot;, 0X0A
+              
+              
+              section .text
+              global _start
+              _start:
+                  mov ax, 67
+                  cmp ax, 67
+                  je _printCaller
+              
+                  
+                  mov rax, 60
+                  xor rdi, rdi
+                  syscall
+              
+              _printCaller:
+                  call _print
+              
+              _print:
+                  mov rax, 1
+                  mov rdi, 1
+                  mov rsi, Hi
+                  mov rdx, 3
+                  syscall
+              </code></pre>
+              <p>I used this build <code>.sh</code> shell script:</p>
+              <pre><code>nasm -felf64 cmp_jmp.asm -o cmp_jmp.o
+              ld cmp_jmp.o -o cmp_jmp
+              </code></pre>
+              <p>It will make use of the <code>nasm</code> command (sudo (apt install (these are going to be your package manager)) to make nasm do something.</p>
+              <p>I don't know what else to specify....</p>
+              <p>PS: the code runs fine, but the error is just there</p>
+              
+
+question_id : 80010870
+title       : Publish package for distribution via vcpkg fails due to missing debug/share
+link        : https://stackoverflow.com/questions/80010870/publish-package-for-distribution-via-vcpkg-fails-due-to-missing-debug-share
+tags        : {c++, cmake, vcpkg}
+body        : <p>For context, I am trying to set up my package for publication through vcpkg, following Microsofts tutorial <a href="https://learn.microsoft.com/en-us/vcpkg/get_started/get-started-packaging?pivots=shell-bash" rel="nofollow noreferrer">here</a>.</p>
+              <p>Unfortunately, the process fails when I run the following command:</p>
+              <pre class="lang-bash prettyprint-override"><code># Working directory: Projects
+              vcpkg install ankicpp --overlay-ports=./ankicpp/custom-overlay
+              </code></pre>
+              <p>The output is:</p>
+              <pre class="lang-none prettyprint-override"><code>~/Projects $ vcpkg install ankicpp --overlay-ports=./ankicpp/custom-overlay
+              Computing installation plan...
+              The following packages will be built and installed:
+                  ankicpp:x64-linux@0.1.7 -- /home/natan/Projects/./ankicpp/custom-overlay/ankicpp
+              Detecting compiler hash for triplet x64-linux...
+              Compiler found: /usr/bin/c++
+              Restored 0 package(s) from /home/natan/.cache/vcpkg/archives in 297 us. Use --debug to see more details.
+              Installing 1/1 ankicpp:x64-linux@0.1.7...
+              ankicpp:x64-linux@0.1.7 package ABI: 4ce877cb51b65bbf9765eb31a57039261638ac8019fca8ce9c65415e1c6bc7c2
+              Building ankicpp:x64-linux@0.1.7...
+              /home/natan/Projects/./ankicpp/custom-overlay/ankicpp: info: installing overlay port from here
+              -- Using cached natancamargo-ankicpp-0.1.7.tar.gz
+              -- Cleaning sources at /home/natan/Projects/vcpkg/buildtrees/ankicpp/src/0.1.7-c57609937b.clean. Use --editable to skip cleaning for the packages you specify.
+              -- Extracting source /home/natan/Projects/vcpkg/downloads/natancamargo-ankicpp-0.1.7.tar.gz
+              -- Using source at /home/natan/Projects/vcpkg/buildtrees/ankicpp/src/0.1.7-c57609937b.clean
+              -- Configuring x64-linux
+              -- Building x64-linux-dbg
+              -- Building x64-linux-rel
+              CMake Error at installed/x64-linux/share/vcpkg-cmake-config/vcpkg_cmake_config_fixup.cmake:81 (message):
+                '/home/natan/Projects/vcpkg/packages/ankicpp_x64-linux/debug/share/ankicpp'
+                does not exist.
+              Call Stack (most recent call first):
+                /home/natan/Projects/ankicpp/custom-overlay/ankicpp/portfile.cmake:17 (vcpkg_cmake_config_fixup)
+                scripts/ports.cmake:209 (include)
+              
+              error: building ankicpp:x64-linux failed with: BUILD_FAILED
+              </code></pre>
+              <p>My directory structure is as follows:</p>
+              <pre class="lang-none prettyprint-override"><code>Projects/
+              └── ankicpp/
+                  └── custom-overlay/
+                      └── ankicpp/
+                          ├── portfile.cmake
+                          ├── usage
+                          └── vcpkg.json
+              </code></pre>
+              <p>The files in <code>custom-overlay/ankicpp</code> are:</p>
+              <pre class="lang-none prettyprint-override"><code># portfile.cmake
+              vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
+              
+              vcpkg_from_github(
+                  OUT_SOURCE_PATH SOURCE_PATH
+                  REPO natancamargo/ankicpp
+                  REF &quot;${VERSION}&quot;
+                  SHA512 e94f4f091b763875b6d2b316594150f09f89c424a1a2a0a64fced8c0b1dfb49a5b19b122712ea8ad47023a2958e244cd3900490f91af2d7998018adad504cbae
+                  HEAD_REF master
+              )
+              
+              vcpkg_cmake_configure(
+                  SOURCE_PATH &quot;${SOURCE_PATH}&quot;
+              )
+              
+              vcpkg_cmake_install()
+              
+              vcpkg_cmake_config_fixup(PACKAGE_NAME &quot;ankicpp&quot;)
+              
+              file(REMOVE_RECURSE &quot;${CURRENT_PACKAGES_DIR}/debug/include&quot;)
+              
+              file(TOUCH &quot;${CURRENT_PACKAGES_DIR}/share/${PORT}/usage-accurate&quot;)
+              vcpkg_install_copyright(FILE_LIST &quot;${SOURCE_PATH}/LICENSE.txt&quot;)
+              </code></pre>
+              <pre class="lang-none prettyprint-override"><code># usage
+              The package ankicpp provides CMake targets:
+              
+                  find_package(ankicpp CONFIG REQUIRED)
+                  target_link_libraries(main PRIVATE ankicpp)
+              </code></pre>
+              <pre class="lang-json prettyprint-override"><code>{
+                &quot;name&quot;: &quot;ankicpp&quot;,
+                &quot;version&quot;: &quot;0.1.7&quot;,
+                &quot;description&quot;: &quot;Small library to create anki cards&quot;,
+                &quot;homepage&quot;: &quot;https://github.com/natancamargo/ankicpp&quot;,
+                &quot;license&quot;: &quot;MIT&quot;,
+                &quot;dependencies&quot;: [
+                  {
+                    &quot;name&quot;: &quot;vcpkg-cmake&quot;,
+                    &quot;host&quot;: true
+                  },
+                  {
+                    &quot;name&quot;: &quot;vcpkg-cmake-config&quot;,
+                    &quot;host&quot;: true
+                  },
+                  &quot;catch2&quot;,
+                  &quot;libuuid&quot;,
+                  &quot;minizip&quot;,
+                  &quot;openssl&quot;,
+                  {
+                    &quot;name&quot;: &quot;soci&quot;,
+                    &quot;features&quot;: [
+                      &quot;sqlite3&quot;
+                    ]
+                  },
+                  &quot;sqlite3&quot;,
+                  &quot;zstd&quot;,
+                  &quot;protobuf&quot;
+                ]
+              }
+              </code></pre>
+              <p>How can I generate the missing <code>debug/share</code> directory, and what is it used for?</p>
+              
+
+question_id : 80010865
+title       : Why does Xcelium throw a hierarchical name error on a module parameter?
+link        : https://stackoverflow.com/questions/80010865/why-does-xcelium-throw-a-hierarchical-name-error-on-a-module-parameter
+tags        : {verilog, system-verilog, test-bench, questasim...}
+body        : <p>I have a simple SystemVerilog code snippet split across a design and a testbench, tested on EDA Playground:</p>
+              <p><code>design.sv</code>:</p>
+              <pre><code>module rtl;
+                  parameter TEST_VALUE = 10;
+              endmodule // rtl
+              </code></pre>
+              <p><code>testbench.sv</code>:</p>
+              <pre><code>module tb;
+                localparam test = rtl.TEST_VALUE;
+                
+                initial begin
+                  $display(&quot;%d&quot;, test);
+                end
+              endmodule // tb
+              </code></pre>
+              <p>When I run this using the Cadence Xcelium simulator, I get the following elaboration error:</p>
+              <pre><code>localparam test = rtl.TEST_VALUE;
+              </code></pre>
+              <blockquote>
+              <p>xmelab: *E,NOTDOT (./testbench.sv,2|33): Hierarchical name ('rtl.TEST_VALUE') not allowed within a constant expression [4(IEEE)].</p>
+              </blockquote>
+              <p>However, when I run the exact same code using Synopsys VCS and Siemens Questa, it compiles and simulates perfectly without any errors.</p>
+              <p><strong>Questions</strong></p>
+              <ol>
+              <li><p>Why does the IEEE 1800-2017 standard prohibit using hierarchical names in this context (what is the exact rule or grammar section being violated)?</p>
+              </li>
+              <li><p>Since <code>rtl</code> is a module name and not an explicit instance name, is this fundamentally an invalid hierarchical reference anyway?</p>
+              </li>
+              <li><p>Why do VCS and Questa permit this behavior while Xcelium strictly errors out during elaboration?</p>
+              </li>
+              </ol>
+              
+
+question_id : 80010862
+title       : Create HTML file via rmd with custom CSS
+link        : https://stackoverflow.com/questions/80010862/create-html-file-via-rmd-with-custom-css
+tags        : {html, css, r}
+body        : <p>I have a rmd-file to create an HTML output.</p>
+              <pre class="lang-yaml prettyprint-override"><code>output:
+                html_document:
+                  toc: false
+                  df_print: paged
+                  number_sections: true
+                  css: &quot;own.css&quot;
+              </code></pre>
+              <p>It works well.</p>
+              <p>The HTML code of the output creates a view with a max width of 940px. This seems to be based on the assigned standard CSS.</p>
+              <pre class="lang-html prettyprint-override"><code>&lt;div class=&quot;container-fluid main-container&quot;&gt;
+              </code></pre>
+              <p>where the related CSS is:</p>
+              <pre class="lang-css prettyprint-override"><code>.main-container {
+              max-width: 940px;
+              margin-left: auto;
+              margin-right: auto;
+              }
+              </code></pre>
+              <p>Now, when I try to set different values into my own.css for the class &quot;.main-container&quot; it has no effect.</p>
+              <pre class="lang-css prettyprint-override"><code>.main-container {
+              max-width: 80%;
+              }
+              </code></pre>
+              <p>What I can see in the browser dev view, the standard CSS has precedence over the definitions of own.css.</p>
+              <p>How can I make sure my definitions &quot;win&quot;?</p>
+              
+
+question_id : 80010858
+title       : Can manually closing a page inside Puppeteer Cluster cause TargetCloseError with Firefox BiDi?
+link        : https://stackoverflow.com/questions/80010858/can-manually-closing-a-page-inside-puppeteer-cluster-cause-targetcloseerror-with
+tags        : {linux, oracle-database, automation, cluster-computing}
+body        : <p>I'm using Puppeteer Cluster 0.25.0 with Puppeteer Core 24.30.0 and Firefox WebDriver BiDi on Linux.</p>
+              <p>My cluster uses <code>CONCURRENCY_CONTEXT</code>, with <code>maxConcurrency: 4</code> and <code>retryLimit: 0</code>.</p>
+              <p>During separate higher-concurrency experiments, I intermittently encountered errors including:</p>
+              <p><code>TargetCloseError: script.callFunction: Target closed</code></p>
+              <p>I noticed that my worker cleanup also explicitly closed the page supplied by Puppeteer Cluster.</p>
+              <p>Here is a simplified excerpt of the original pattern:</p>
+              <pre><code>const cluster = await Cluster.launch({
+                puppeteer,
+                concurrency: Cluster.CONCURRENCY_CONTEXT,
+                maxConcurrency: 4,
+                retryLimit: 0,
+                puppeteerOptions: {
+                  browser: 'firefox',
+                  protocol: 'webDriverBiDi',
+                  headless: true,
+                  executablePath: firefoxPath
+                }
+              });
+              
+              await Promise.all(jobs.map(job =&gt;
+                cluster.execute(job, async ({ page }) =&gt; {
+                  try {
+                    await processJob(page, job);
+                  } finally {
+                    await page.close();
+                  }
+                })
+              ));
+              
+              await cluster.idle();
+              await cluster.close();
+              </code></pre>
+              <p>I understand that Puppeteer Cluster manages task resources internally. I've now removed the explicit <code>page.close()</code> from my actual runner and left page disposal to the cluster.</p>
+              <p>However, that change hasn't yet been verified against the original intermittent failure, so I can't say whether it resolves the error.</p>
+              <p><strong>My question:</strong> Is manually closing the supplied <code>page</code> inside a <code>cluster.execute()</code> task unsupported or unsafe with <code>CONCURRENCY_CONTEXT</code>, particularly when using Firefox WebDriver BiDi?</p>
+              <p>I'm trying to establish the correct page-lifecycle ownership before investigating any remaining worker failures.</p>
+              <p>I've also reviewed the library's existing page-cleanup discussion in GitHub issue #34.</p>
+              
+
+question_id : 80010856
+title       : How to run the passport guard before injecting request scoped service?
+link        : https://stackoverflow.com/questions/80010856/how-to-run-the-passport-guard-before-injecting-request-scoped-service
+tags        : {nestjs}
+body        : <p>I have registered the global auth guard in the app module</p>
+              <pre class="lang-ts prettyprint-override"><code>  providers: [
+                  AppService,
+                  { provide: APP_GUARD, useClass: SkippableBasicAuthGuard },
+                  { provide: APP_GUARD, useClass: ThrottlerGuard },
+                ],
+              })
+              export class AppModule {}
+              </code></pre>
+              <p>I want to inject the integration based on the user, but <code>request.user</code> is undefined</p>
+              <pre class="lang-ts prettyprint-override"><code>{
+                    provide: Integration,
+                    scope: Scope.REQUEST,
+                    inject: [REQUEST],
+                    useFactory(req: Request) {
+                      const integrationName = &lt;Maybe&lt;String&gt;&gt;request.headers['x-integration']
+                      if (!integrationName) return null;
+              
+                      const IntegrationKlass = IntegrationRegistry[integrationName];
+                      if (!IntegrationKlass) throw new BadRequestException('Invalid integration');
+              
+                      console.log(req.user); // undefined
+              
+                      return new IntegrationKlass('token');  // get the token for the user using this.prisma.integrationToken(req.user.id, integrationName)
+                    },
+                  },
+                ],
+              })
+              export class IntegrationModule {}
+              </code></pre>
+              <p>The order of service injection happens first, but the request lifecycle otherwise. <a href="https://docs.nestjs.com/faq/request-lifecycle#summary" rel="nofollow noreferrer">https://docs.nestjs.com/faq/request-lifecycle#summary</a></p>
+              
+
+question_id : 80010854
+title       : Data transfer from Ansys Fluent to Ansys Mechanical
+link        : https://stackoverflow.com/questions/80010854/data-transfer-from-ansys-fluent-to-ansys-mechanical
+tags        : {reverse-engineering, fluent, thermal-printer, ansys}
+body        : <p>How to transfer fluents .dat and .cas files to thermal transient to solve transient problem? I have 100 dat and cas files and each of them contains information about temperature. I need to transfer them all to thermal transient and make there 100 time steps according to this files. 
+              1 cas data file - 1 temperature information in thermal. Because Thermal only permits to import 1 dat file, no matter how much time steps I put in Analysis Settings. Trying to do so through External Data, Fluent Data or MAPDL files. Anyone knows how to do so?</p>
+              
+
+question_id : 80010846
+title       : What are the limitations of AI-generated Java code when implementing complex business logic in Spring Boot?
+link        : https://stackoverflow.com/questions/80010846/what-are-the-limitations-of-ai-generated-java-code-when-implementing-complex-bus
+tags        : {advice, java, spring}
+body        : <p>With the rapid development of AI tools that can generate code, debug errors, write tests, and assist with software architecture, I am curious about how the responsibilities of software engineers will evolve over the next 5–10 years.</p>
+              <p>I am currently learning Java and preparing to develop backend applications using Spring Boot, REST APIs, databases, and software testing.</p>
+              <p>I have a few questions:</p>
+              <ol>
+              <li><p>Which software engineering skills are likely to remain important as AI coding tools become more capable?</p>
+              </li>
+              <li><p>Will backend developers need to focus more on system design, architecture, security, and problem-solving rather than writing code?</p>
+              </li>
+              <li><p>How should someone entering the software engineering industry prepare for an AI-driven development environment?</p>
+              </li>
+              </ol>
+              <p>I would appreciate insights based on practical software development experience, particularly from developers who have integrated AI tools into their daily workflows.</p>
+              
+
+question_id : 80010831
+title       : Three-body solver using RK45 produces incorrect &quot;shifted&quot; plot
+link        : https://stackoverflow.com/questions/80010831/three-body-solver-using-rk45-produces-incorrect-shifted-plot
+tags        : {python, physics, numerical-methods, astronomy...}
+body        : <p>I am trying to implement the RK45 (Runge-Kutta-Fehlberg) method (outlined <a href="https://maths.cnam.fr/IMG/pdf/RungeKuttaFehlbergProof.pdf" rel="nofollow noreferrer">here</a>) from scratch for use in an N-body simulation. Testing my implementation against known periodic 
+              solutions, e.g. &quot;<a href="https://www.threebodyorbits.com/orbit/pancake2026_golden_pancake_drama" rel="nofollow noreferrer">Golden Pancake Drama</a>&quot; (GPD) and &quot;<a href="https://www.threebodyorbits.com/orbit/broucke_broucke_a_2" rel="nofollow noreferrer">Broucke 
+              A2</a>&quot; (BA2), the results are <em>roughly</em> the correct shape of the trajectories, but seemingly with incorrect values resulting in the plots looking shifted/squashed and the closed loop(s) not being formed.</p>
+              <p>Expected (GPD, obtained with RK4 implementation):</p>
+              <p><img src="https://i.sstatic.net/QSi7GODn.png" alt="Expected (GPD, obtained with RK4 implementation):" /></p>
+              <p>Outputted:</p>
+              <p><img src="https://i.sstatic.net/LREomgdr.png" alt="Outputted" /></p>
+              <p>Full RK45 code:</p>
+              <pre class="lang-py prettyprint-override"><code>import numpy as np
+              from matplotlib import pyplot as plt
+              
+              time_val=0
+              n=0
+              
+              softening = 1e-6
+              big_G = 1
+              max_step = 5e-5
+              min_step = 1e-12
+              err_tolerance = 1.5e-11
+              
+              state_arr = np.array([
+                  [1, -1.000000000000, 0.000000000000, 0.151837333844, 0.139577137808],
+                  [0.6123560888279949, 0.000000000000, 0.000000000000, -0.495911893796, -0.455869192302],
+                  [1, 1.000000000000, 0.000000000000, 0.151837333844, 0.139577137808]
+              ])
+              plot_title = 'GOLDEN PANCAKE DRAMA'
+              delta_t = 1e-4
+              duration_t = 8.8457131110
+              
+              # plot_title='FIGURE-8'
+              # duration_t = 6.34115
+              # delta_t = 1e-1
+              # state_arr = np.array([
+              # [1,0.97000436,-0.24308753,0.93240737/2,0.8643146/2],
+              # [1,-0.97000436,0.24308753,0.93240737/2,0.8643146/2],
+              # [1,0,0,-0.93240737,-0.8643146]
+              # ])
+              
+              # state_arr = np.array([
+              #     [1, 0.336130095000, 0.000000000000, 0.000000000000, 1.532431537000],
+              #     [1, 0.769989380400, 0.000000000000, 0.000000000000, -0.628735097800],
+              #     [1, -1.106119475300, 0.000000000000, 0.000000000000, -0.903696439100]
+              # ])
+              # plot_title='BROUCKE A2'
+              # delta_t=5e-6
+              # duration_t=7.7024080000
+              
+              def arr_calc(inp_arr, index):
+                  tot_acc_x = 0
+                  tot_acc_y = 0
+              
+                  x1, y1, vx, vy = inp_arr
+              
+                  for i in range(len(state_arr)):
+                      if i != index:
+                          m, x2, y2 = state_arr[i][:3]
+                          rx = x1 - x2
+                          ry = y1 - y2
+                          r_mag_sqr = rx**2 + ry**2 + softening**2
+              
+                          tot_acc_x -= big_G*m*(x1 - x2)/(r_mag_sqr**1.5)
+                          tot_acc_y -= big_G*m*(y1 - y2)/(r_mag_sqr**1.5)
+              
+                  return np.array([vx, vy, tot_acc_x, tot_acc_y])
+              
+              def arr_mag(inp_arr):
+                  return np.sqrt(sum([i**2 for i in inp_arr]))
+              
+              def rk45_i(inp_arr, dt, index):
+                  r_v_arr = inp_arr[index][1:]
+              
+                  k1 = arr_calc(r_v_arr, index)*dt
+              
+                  k2 = arr_calc(r_v_arr + k1/4, index)*dt
+              
+                  k3 = arr_calc(r_v_arr + k1*3/32 + k2*9/32, index)*dt
+              
+                  k4 = arr_calc(r_v_arr + k1*1932/2197 - k2*7200/2197 + k3*7296/2197, index)*dt
+              
+                  k5 = arr_calc(r_v_arr + k1*439/216 - k2*8 + k3*3680/513 - k4*845/4104, index)*dt
+              
+                  k6 = arr_calc(r_v_arr - k1*8/27 + k2*2 - k3*3544/2565 + k4*1859/4104 - k5*11/40, index)*dt
+              
+                  k = k1*25/216 + k3*1408/2565 + k4*2197/4104 - k5*1/5
+                  r = np.abs(k1*1/360 - k3*128/4275 - k4*2197/75240 + k5*1/50 + k6*2/55)/dt
+              
+                  return k, arr_mag(r)
+              
+              def rk45_step(inp_arr, dt, err_tol, max_h, min_h):
+                  out_arr = inp_arr
+              
+                  while True:
+                      R_list = []
+                      k_list = []
+              
+                      for i in range(len(inp_arr)):
+                          k, r = rk45_i(inp_arr, dt, i)
+                          R_list.append(r)
+                          k_list.append(k)
+              
+                      r_val = max(R_list)
+                      # r_val = abs(np.average(k_list))
+              
+                      delta = (err_tol/(2*r_val))**(1/4)
+              
+                      dt *= delta
+              
+                      if dt &gt; max_h:
+                          dt = max_h
+                      elif dt &lt; min_h:
+                          dt = min_h
+              
+                      if r_val &lt;= err_tol:
+                          for i in range(len(inp_arr)):
+                              out_arr[i][1:] += k_list[i]
+                          return out_arr, dt
+              
+              x1_plot = []
+              y1_plot = []
+              x2_plot = []
+              y2_plot = []
+              x3_plot = []
+              y3_plot = []
+              t_plot = []
+              
+              frame_interval = 50
+              
+              while time_val &lt; duration_t:
+                  state_arr, delta_t = rk45_step(state_arr, delta_t, err_tolerance, max_step, min_step)
+              
+                  if n % frame_interval == 0:
+              
+                      t_plot.append(time_val)
+              
+                      x1_plot.append(state_arr[0][1])
+                      y1_plot.append(state_arr[0][2])
+              
+                      x2_plot.append(state_arr[1][1])
+                      y2_plot.append(state_arr[1][2])
+              
+                      x3_plot.append(state_arr[2][1])
+                      y3_plot.append(state_arr[2][2])
+              
+                      print(f'TRAJECTORY CALCULATION: {round(100*time_val / duration_t, 3):.3f}%, {round(time_val, 15):.12f}, dt = 1e{np.log10(delta_t)}s')
+              
+                  time_val += delta_t
+                  n += 1
+              
+              f=plt.figure(layout='constrained', figsize=(5,5))
+              plt.plot(x1_plot, y1_plot, c='blue', linewidth=0.25, label='m1')
+              plt.plot(x2_plot, y2_plot, c='red', linewidth=0.25, label='m2')
+              plt.plot(x3_plot, y3_plot, c='green', linewidth=0.25, label='m3')
+              f.legend(loc='outside lower center', fontsize=9, ncols=len(state_arr)+2)
+              plt.show()
+              </code></pre>
+              <p>RK4 code for comparison:</p>
+              <pre class="lang-py prettyprint-override"><code>import numpy as np
+              import matplotlib.pyplot as plt
+              
+              time_val=0
+              n=0
+              
+              softening = 5e-5
+              big_G = 1
+              
+              state_arr = np.array([
+                  [1, -1.000000000000, 0.000000000000, 0.151837333844, 0.139577137808],
+                  [0.6123560888279949, 0.000000000000, 0.000000000000, -0.495911893796, -0.455869192302],
+                  [1, 1.000000000000, 0.000000000000, 0.151837333844, 0.139577137808]
+              ])
+              plot_title='GOLDEN PANCAKE DRAMA'
+              delta_t=1e-5
+              duration_t=8.8457131110
+              
+              def arr_calc(inp_arr, index):
+                  tot_acc_x = 0
+                  tot_acc_y = 0
+              
+                  x1, y1, vx, vy = inp_arr
+              
+                  for i in range(len(state_arr)):
+                      if i != index:
+                          m, x2, y2 = state_arr[i][:3]
+                          rx = x1 - x2
+                          ry = y1 - y2
+                          r_mag_sqr = rx**2 + ry**2 + softening**2
+              
+                          tot_acc_x -= big_G*m*(x1 - x2)/(r_mag_sqr**1.5)
+                          tot_acc_y -= big_G*m*(y1 - y2)/(r_mag_sqr**1.5)
+              
+                  return np.array([vx, vy, tot_acc_x, tot_acc_y])
+              
+              def rk4(inp_arr, dt, index):
+                  r_v_arr = inp_arr[index][1:]
+              
+                  k1 = arr_calc(r_v_arr, index)
+                  k2 = arr_calc(r_v_arr + k1*dt/2, index)
+                  k3 = arr_calc(r_v_arr + k2*dt/2, index)
+                  k4 = arr_calc(r_v_arr + k3*dt, index)
+              
+                  k = (k1 + 2*k2 + 2*k3 + k4)*dt/6
+              
+                  return k
+              
+              def rk_step(inp_arr, dt):
+                  out_arr = inp_arr
+                  for i in range(len(inp_arr)):
+                      out_arr[i][1:] += rk4(inp_arr, dt, i)
+              
+                  return out_arr
+              
+              x1_plot = []
+              y1_plot = []
+              x2_plot = []
+              y2_plot = []
+              x3_plot = []
+              y3_plot = []
+              t_plot = []
+              
+              frame_interval = 40/(delta_t*2000)
+              frame_interval = 5e2
+              
+              while time_val &lt; duration_t:
+                  state_arr = rk_step(state_arr, delta_t)
+              
+                  if n % frame_interval == 0:
+              
+                      t_plot.append(time_val)
+              
+                      x1_plot.append(state_arr[0][1])
+                      y1_plot.append(state_arr[0][2])
+              
+                      x2_plot.append(state_arr[1][1])
+                      y2_plot.append(state_arr[1][2])
+              
+                      x3_plot.append(state_arr[2][1])
+                      y3_plot.append(state_arr[2][2])
+              
+                      print(f'TRAJECTORY CALCULATION: {round(100*time_val / duration_t, 3):.3f}%')
+              
+                  time_val += delta_t
+                  n += 1
+              
+              f=plt.figure(layout='constrained', figsize=(5,5))
+              plt.plot(x1_plot, y1_plot, c='blue', linewidth=0.25, label='m1')
+              plt.plot(x2_plot, y2_plot, c='red', linewidth=0.25, label='m2')
+              plt.plot(x3_plot, y3_plot, c='green', linewidth=0.25, label='m3')
+              f.legend(loc='outside lower center', fontsize=9, ncols=len(state_arr)+20)
+              plt.show()
+              </code></pre>
+              <p>My main (or only) suspicion is that the <code>dt</code> variable in the <code>rk45_step</code> function is being modified before being returned with the updated state. Any attempt I've made to rectify this seems to break the program and it won't update the timestep and results in 
+              slow, even-more inaccurate results.</p>
+              <p>I would also like to make it clear that I am aware of the <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html" rel="nofollow noreferrer">SciPy solve_ivp</a> function, but want to keep my program as &quot;from scratch&quot; as possible.</p>
+              
+
+question_id : 80010829
+title       : Why does an int variable that multiplies by a double still type as an int?
+link        : https://stackoverflow.com/questions/80010829/why-does-an-int-variable-that-multiplies-by-a-double-still-type-as-an-int
+tags        : {c++, types}
+body        : <p>I was exploring types of variables and cannot understand why, when getting to the last two lines of the following code, the variable <code>i</code> types as an <code>int</code>. I think I understand type coercion but I thought that the type that takes precedence is the larger type. 
+              Have I understood this wrong? And why does <code>i</code> show up as an <code>int</code> if it is multiplied by a <code>double</code>?</p>
+              <p>Code:</p>
+              <pre class="lang-cpp prettyprint-override"><code>void some_function() 
+              {
+                  double d = 2.2;
+                  cout &lt;&lt; &quot;1: double d: &quot; &lt;&lt; d &lt;&lt; &quot; type is: &quot; &lt;&lt; typeid(d).name() &lt;&lt; &quot;\n&quot;;
+                  int i = 7;
+                  cout &lt;&lt; &quot;2: int i: &quot; &lt;&lt; i &lt;&lt; &quot; type is: &quot; &lt;&lt; typeid(i).name() &lt;&lt; &quot;\n&quot;;
+                  d = d + i;
+                  cout &lt;&lt; &quot;3: double d plus int i: &quot; &lt;&lt; d &lt;&lt; &quot; type is: &quot; &lt;&lt; typeid(d).name() &lt;&lt; &quot;\n&quot;;
+                  i = d * i;
+                  cout &lt;&lt; &quot;4: d * i: &quot; &lt;&lt; i &lt;&lt; &quot; type is: &quot; &lt;&lt; typeid(i).name() &lt;&lt; &quot;\n&quot;;
+              }
+              </code></pre>
+              <p>Output:</p>
+              <pre class="lang-none prettyprint-override"><code>1: double d: 2.2 type is: double  
+              2: int i: 7 type is: int  
+              3: double d plus int i: 9.2 type is: double  
+              4: d * i: 64 type is: int
+              </code></pre>
+              
+
+question_id : 80010805
+title       : Creating a Kotlin project without the standard library
+link        : https://stackoverflow.com/questions/80010805/creating-a-kotlin-project-without-the-standard-library
+tags        : {java, kotlin, standard-library, kotlin-stdlib}
+body        : <p>I somehow got it into my head to try and make my own standard library for Kotlin (based on Java's), for educational purposes.
+              However, I can't seem to figure out how to make a Kotlin project in IntelliJ IDEA that doesn't use the stdlib.</p>
+              <p>In <code>build.gradle.kts</code> I've tried doing</p>
+              <pre class="lang-kt prettyprint-override"><code>configurations.all {
+                  exclude(group = &quot;org.jetbrains.kotlin&quot;, module = &quot;kotlin-stdlib&quot;)
+              }
+              </code></pre>
+              <p>But it seems that nothing will compile like that at <em>all</em>:</p>
+              <pre class="lang-none prettyprint-override"><code>Failed to compile with Kotlin daemon: java.lang.NoClassDefFoundError: kotlin/jvm/internal/Intrinsics
+                at ...
+              </code></pre>
+              <p>It seems like &quot;intrinsics&quot; in the stdlib are required by the compiler or something?</p>
+              <p>I also tried using <code>compileOnly</code>, in hopes that it would use the standard library only <em>while compiling</em>, but that's not how it works, apparently.</p>
+              <pre class="lang-kt prettyprint-override"><code>dependencies {
+                  compileOnly(&quot;org.jetbrains.kotlin:kotlin-stdlib&quot;)
+              }
+              </code></pre>
+              <p>Is there any way to use only Java's standard library for a Kotlin project?</p>
+              
+
+question_id : 80010804
+title       : My bootloader fails to properly read the FAT12 root directory
+link        : https://stackoverflow.com/questions/80010804/my-bootloader-fails-to-properly-read-the-fat12-root-directory
+tags        : {assembly, x86-16, bootloader, osdev...}
+body        : <p>I am writing a hobbyist operating system. Currently I am working on the first stage of the boot process, but my bootloader is failing to properly parse the FAT12 root directory.</p>
+              <p>Anyone know why?</p>
+              <pre><code>bits 16
+              org 7C00h
+              
+              _bpb:
+                  jmp short _start
+                  nop
+              
+                  .oem:                       db &quot;SKELEOS &quot;
+                  .sect_size:                 dw 512
+                  .clus_size:                 db 1
+                  .res_sect:                  dw 1
+                  .num_fats:                  db 1
+                  .root_ents:                 dw 64
+                  .vol_size:                  dw 2880
+                  .media:                     db 0F0h
+                  .fat_size:                  dw 1
+                  .sect_per_trk:              dw 18
+                  .heads:                     dw 2
+                  .hid_sect:                  dd 0
+                                              dd 0
+              
+              _ebr:
+                  .drive:                     db 0
+                                              db 0
+                  .boot_sig:                  db 29h
+                  .serial_num:                dd 4C454B53h
+                  .vol_lbl:                   db &quot;BOOTDSK 000&quot;
+                  .fs_type:                   db &quot;FAT12   &quot;
+              
+              _start:
+                  ; Setup registers
+                  cli
+                  xor ax, ax
+                  mov ds, ax
+                  mov ss, ax
+                  mov es, ax
+              
+                  mov sp, 7C00h
+                  mov bp, sp
+                  sti
+              
+                  mov [_ebr.drive], dl
+                  cld
+              
+              .continue:
+                  call dsk_reset
+              
+                  call serial_init
+              
+                  ; Returns the LBA address of the root
+              find_root:
+                  push dx
+                  xor ch, ch
+              
+                  mov cl, [_bpb.num_fats]
+                  mul word [_bpb.fat_size]
+                  add cx, [_bpb.res_sect]
+              
+                  pop dx
+              
+              .next:
+              
+                  ; Get root size
+                  call root_size
+              
+                  mov bx, buf
+                  call dsk_read
+              
+              ; Finds LKRNL.BIN and loads it
+              ; ERROR HERE
+              find_lkrnl:
+                  push ax
+                  push cx
+                  mov di, bx
+              
+                  xor ax, ax
+                  .find:
+                      cmp ax, [_bpb.root_ents]
+                      jge error
+              
+                      mov si, lkrnl_path
+                      mov cx, 11
+              
+                      push di
+                      repz cmpsb
+                      pop di
+              
+                      jz .found
+              
+                      add di, DIRENT_SIZE
+                      inc ax
+                      jmp .find
+              
+                  .not_found:
+                      jmp error
+                  
+                  .found:
+                      mov [_flag], byte '3'
+                      call flag
+              
+                      mov ax, [di + 26]
+                      pop cx
+                      pop ax
+              
+              read_fat:
+                  mov [_flag], byte 'C'
+                  call flag
+              
+                  push ax
+                  mov cx, [_bpb.res_sect]
+                  call root_size
+                  add cx, ax
+              
+                  mov ax, [_bpb.fat_size]
+                  add cx, [_bpb.num_fats]
+                  call dsk_read
+              
+                  pop ax
+                  mov cx, ax
+              
+                  mov [_flag], byte 'D'
+                  call flag
+              
+                  mov bx, LKRNL_OFF
+              
+              read_lkrnl:
+                  mov si, cx
+                  shr si, 1
+                  add si, cx
+              
+                  test cx, 1
+                  jz .even
+              
+                  push cx
+              
+                  .odd:
+                      mov [_flag], 'E'
+                      call flag
+              
+                      mov al, [si]
+                      mov ah, [si + 1]
+                      shr ax, 4
+              
+                      jmp .read
+              
+                  .even:
+                      mov [_flag], 'F'
+                      call flag
+              
+                      mov al, [si]
+                      mov ah, [si + 1]
+                      and al, 0Fh
+              
+                      jmp .read
+              
+                  .read:
+                      mov [_flag], 'G'
+                      call flag
+              
+                      push ax
+                      push dx
+              
+                      mov ax, [_bpb.num_fats]
+                      mul [_bpb.fat_size]
+                      mov cx, ax
+                      add cx, [_bpb.res_sect]
+              
+                      call root_size
+                      add cx, ax
+              
+                      pop dx
+              
+                      mov al, 1
+                      call dsk_read
+              
+                      mov [_flag], 'H'
+                      call flag
+              
+                      pop ax
+                      pop cx
+                      mov cx, ax
+              
+                      inc bx
+                      cmp ax, 0FEFh
+                      jl read_lkrnl
+              
+                  .finished:
+                      jmp far LKRNL_SEG:LKRNL_OFF
+              
+              jmp halt
+              
+              ; Reads from disk
+              ; Arguments:
+              ; al - amount of sectors
+              ; cx - lba
+              ; dl - drive
+              ; es:bx - buffer
+              dsk_read:
+                  mov dl, [_ebr.drive]
+              
+                  push ax
+                  call lba_to_chs
+                  pop ax
+              
+                  mov si, 3
+                  mov ah, 02h
+                  .read:
+                      stc
+              
+                      pusha
+                      int 13h
+                      popa
+                      jnc .finish
+              
+                      call dsk_reset
+                      dec si
+                      test si, si
+                      jz error
+              
+                      jmp .read
+              
+                  .finish:
+                      ret
+              
+              ; Display string
+              error:
+                  mov si, err
+              
+              print:
+                  lodsb
+                  test al, al
+                  jz halt
+              
+                  mov ah, 0Eh
+                  int 10h
+              
+                  jmp print
+              
+              ; Halt loop
+              halt:
+                  cli
+                  hlt
+              
+                  jmp halt
+              
+              dsk_reset:
+                  xor ah, ah
+                  pusha
+                  int 13h
+                  popa
+                  jc error
+              
+                  ret
+              
+              serial_init:
+                  pusha
+              
+                  xor ah, ah
+                  mov al, 0A7h
+                  xor dx, dx
+                  int 14h
+              
+                  popa
+                  ret
+              
+              ; Prints a single character (&quot;flag&quot;)
+              flag:
+                  push ax
+                  push dx
+                  mov al, [_flag]
+              
+                  mov ah, 01h
+                  xor dx, dx
+                  int 14h
+                  jc error
+              
+                  pop dx
+                  pop ax
+                  ret
+              
+              ; Converts LBA To CHS
+              ; Arguments:
+              ; ax - lba
+              ; 
+              ; Returns:
+              ; cl - sector
+              ; ch - cylinder
+              ; dh - head
+              lba_to_chs:
+                  push ax
+                  push dx
+              
+                  xor dx, dx
+                  div word [_bpb.sect_per_trk]
+              
+                  inc dx
+                  mov cx, dx
+              
+                  xor dx, dx
+                  div word [_bpb.heads]
+              
+                  mov dh, dl
+                  mov ch, al
+                  shl ah, 6
+                  or cl, ah
+              
+                  pop ax
+                  mov dl, al
+                  pop ax
+                  ret
+              
+              ; Calculates the size of the root
+              ; Returns
+              ; ax - size of root
+              root_size:
+                  push dx
+              
+                  mov ax, [_bpb.root_ents]
+                  shl ax, 5
+                  xor dx, dx
+                  div word [_bpb.sect_size]
+              
+                  pop dx
+                  ret
+              
+              err: db &quot;error&quot;, 0Ah, 0Dh, 00h
+              lkrnl_path: db &quot;LKRNL   BIN&quot;
+              lkrnl_clus: dw 0
+              _flag: db 0
+              
+              LKRNL_OFF: equ 8400h
+              LKRNL_SEG: equ 0000h
+              
+              DIRENT_SIZE: equ 32
+              
+              times 510 - ($ - $$) db 0
+              dw 0AA55h
+              
+              buf:
+              
+              times (2879 * 512) db 0
+              </code></pre>
+              <p>Build process (Makefile):</p>
+              <pre class="lang-make prettyprint-override"><code>#
+              # SkeleOS bootloader makefile
+              # Copyright (C) 2026  Skeletonz33
+              #
+              
+              ASM=nasm
+              ASMFLAGS=-f bin
+              
+              BOOT=boot.asm
+              SRC=lkrnl.asm
+              BIN=$(SRC:.asm=.bin)
+              
+              BUILD=/skeleos/build
+              
+              BOOT_IMG=$(BUILD)/boot.img
+              MEM=16
+              CPU=486
+              
+              VM=qemu-system-i386
+              VMFLAGS=-drive file=$(BOOT_IMG),format=raw,if=floppy,index=0 -boot order=a,menu=off -m $(MEM) -cpu $(CPU) -serial stdio
+              
+              MNT=imdisk
+              MNTDRV=Z:
+              MNTFLAGS=-a -m $(MNTDRV) -o rem -f
+              UMNTFLAGS=-D -m $(MNTDRV)
+              
+              CP=copy
+              CPFLAGS=/b
+              
+              LOG=log.bin
+              
+              all: $(BOOT_IMG) mount $(BIN:%=$(BUILD)/%) unmount | $(BUILD)
+              
+              $(BUILD):
+                  mkdir $(BUILD)
+              
+              $(BOOT_IMG): $(BOOT)
+                  $(ASM) $(ASMFLAGS) $&lt; -o $@
+              
+              $(BUILD)/%.bin: %.asm $(BOOT_IMG) | $(BUILD)
+                  $(ASM) $(ASMFLAGS) $&lt; -o $@
+                  $(CP) C:$(subst /,\,$@) $(MNTDRV)\$(notdir $@) $(CPFLAGS)
+              
+              run:
+                  $(VM) $(VMFLAGS) &gt; $(LOG)
+              
+              mount:
+                  $(MNT) $(MNTFLAGS) C:$(subst /,\,$(BOOT_IMG))
+              
+              unmount:
+                  $(MNT) $(UMNTFLAGS)
+              </code></pre>
+              <p>log.bin is empty after I run QEMU
+              I run <code>make all</code>, then <code>make run</code>, then I read log.bin</p>
+              <p>Also do not focus on the actual makefile, if it works it works</p>
+              
+
+question_id : 80010801
+title       : iOS build fails after upgrading to React Native 0.87: &#39;RCTBridge.h&#39; file not found in a library
+link        : https://stackoverflow.com/questions/80010801/ios-build-fails-after-upgrading-to-react-native-0-87-rctbridge-h-file-not-fou
+tags        : {ios, xcode, react-native, expo...}
+body        : <p>After upgrading to React Native 0.87 (Expo SDK 58 uses 0.88, same problem), `pod install` works but the iOS build stops inside a library that compiled fine before:</p>
+              <p>node_modules/@react-native-menu/menu/ios/MenuViewManager.mm:3:9: 'RCTBridge.h' file not found</p>
+              <p>With another library the same error names a different header:</p>
+              <p>node_modules/react-native-date-picker/ios/DatePicker.m:7:9: error: 'RCTComponent.h' file not found</p>
+              <p>Clearing DerivedData, reinstalling pods and `node_modules` doesn't help. The libraries import the headers like this:</p>
+              <pre><code>#import &quot;RCTBridge.h&quot;
+              </code></pre>
+              <p>What changed in 0.87, and how do I fix it without waiting for every library to release an update?</p>
+              
+
+question_id : 80010792
+title       : Content Negotiation Standard HTTP response
+link        : https://stackoverflow.com/questions/80010792/content-negotiation-standard-http-response
+tags        : {best-practices, http, content-negotiation}
+body        : <p>For an e-commerce ERP. Should I leave generic http response messages to the public routes such as the cart checkout; or be descriptive to the client?
+              The user doesn't have a logging account.
+              The app uses flask.
+              The alternative is a customized response per public route with responses in jsonify in 400, 401, 402, 404, 405, and 500;
+              for instance;</p>
+              <pre><code>if variant.stock_quantity &lt; order_item.quantity:
+                  db.session.rollback()
+                      return {&quot;error&quot;: &quot;Insufficient stock&quot;}, 409;
+              </code></pre>
+              <p>or;</p>
+              <pre><code>if variant.stock_quantity &lt; order_item.quantity:
+                  db.session.rollback()
+                  # let centralized error handling respond
+                      abort(409)
+              </code></pre>
+              
+
+question_id : 80010788
+title       : iPhone Duo: tab bar briefly moves right after dismissing a fullScreen modal
+link        : https://stackoverflow.com/questions/80010788/iphone-duo-tab-bar-briefly-moves-right-after-dismissing-a-fullscreen-modal
+tags        : {ios, swift, uikit, uinavigationcontroller...}
+body        : <p>Xcode 27.1 (27A9275), iPhone Duo simulator, iOS 27.1, folded portrait.</p>
+              <p>Tap <strong>Present</strong>, then <strong>Close</strong>. Expected: horizontal bars throughout. Actual: the tab bar briefly moves from the bottom to the right, shrinking Home’s safe area, then returns. Both navigation controllers use <code>.disabled</code> and return 
+              <code>nil</code> for child forwarding.</p>
+              <p><img src="https://i.sstatic.net/6JCn3eBM.gif" alt="Tab bar briefly moves right during fullScreen dismissal" /></p>
+              <p>How can I prevent this while keeping <code>.fullScreen</code> and UIKit’s automatic appearance callbacks? <code>.overFullScreen</code> changes those callbacks; forcing bar updates/layout did not help.</p>
+              <p>Single-file UIKit app (deployment target iOS 27.1, scene lifecycle enabled, no storyboards):</p>
+              <pre class="lang-swift prettyprint-override"><code>import UIKit
+              
+              @main
+              final class AppDelegate: UIResponder, UIApplicationDelegate {
+                  func application(_ application: UIApplication,
+                                   configurationForConnecting session: UISceneSession,
+                                   options: UIScene.ConnectionOptions) -&gt; UISceneConfiguration {
+                      let configuration = UISceneConfiguration(name: nil, sessionRole: session.role)
+                      configuration.delegateClass = SceneDelegate.self
+                      return configuration
+                  }
+              }
+              
+              final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+                  var window: UIWindow?
+              
+                  func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
+                             options: UIScene.ConnectionOptions) {
+                      guard let scene = scene as? UIWindowScene else { return }
+                      let home = HorizontalNavigationController(rootViewController: Page())
+                      home.tabBarItem = UITabBarItem(title: &quot;Home&quot;, image: UIImage(systemName: &quot;house&quot;), tag: 0)
+                      let other = HorizontalNavigationController(rootViewController: UIViewController())
+                      other.tabBarItem = UITabBarItem(title: &quot;Other&quot;, image: UIImage(systemName: &quot;star&quot;), tag: 1)
+                      let tabs = UITabBarController()
+                      tabs.viewControllers = [home, other]
+                      let window = UIWindow(windowScene: scene)
+                      window.rootViewController = tabs
+                      self.window = window
+                      window.makeKeyAndVisible()
+                  }
+              }
+              
+              final class HorizontalNavigationController: UINavigationController {
+                  override var preferredVerticalBarBehavior: UIVerticalBarBehavior { .disabled }
+                  override var childForPreferredVerticalBarBehavior: UIViewController? { nil }
+              }
+              
+              final class Page: UIViewController {
+                  var isModal = false
+              
+                  override func viewDidLoad() {
+                      super.viewDidLoad()
+                      title = isModal ? &quot;Full screen&quot; : &quot;Home&quot;
+                      view.backgroundColor = .systemBackground
+                      navigationItem.rightBarButtonItem = UIBarButtonItem(
+                          title: isModal ? &quot;Close&quot; : &quot;Present&quot;, style: .plain,
+                          target: self, action: #selector(Page.performAction))
+              
+                      let box = UIView()
+                      box.backgroundColor = isModal ? .systemIndigo : .systemTeal
+                      box.layer.borderColor = UIColor.systemYellow.cgColor
+                      box.layer.borderWidth = 4
+                      box.translatesAutoresizingMaskIntoConstraints = false
+                      view.addSubview(box)
+                      let safe = view.safeAreaLayoutGuide
+                      NSLayoutConstraint.activate([
+                          box.topAnchor.constraint(equalTo: safe.topAnchor),
+                          box.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+                          box.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+                          box.trailingAnchor.constraint(equalTo: safe.trailingAnchor)
+                      ])
+                      let label = UILabel()
+                      label.text = isModal ? &quot;Tap Close&quot; : &quot;Safe area&quot;
+                      label.textColor = .white
+                      label.font = .systemFont(ofSize: 28)
+                      label.translatesAutoresizingMaskIntoConstraints = false
+                      box.addSubview(label)
+                      NSLayoutConstraint.activate([
+                          label.centerXAnchor.constraint(equalTo: box.centerXAnchor),
+                          label.centerYAnchor.constraint(equalTo: box.centerYAnchor)
+                      ])
+                  }
+              
+                  @objc private func performAction() {
+                      if isModal {
+                          dismiss(animated: true)
+                      } else {
+                          let page = Page()
+                          page.isModal = true
+                          let modal = HorizontalNavigationController(rootViewController: page)
+                          modal.modalPresentationStyle = .fullScreen
+                          present(modal, animated: true)
+                      }
+                  }
+              }
+              </code></pre>
+              
+
+question_id : 80010774
+title       : How to safely manipulate or inspect stack frames in C++ using inline assembly without triggering Undefined Behavior?
+link        : https://stackoverflow.com/questions/80010774/how-to-safely-manipulate-or-inspect-stack-frames-in-c-using-inline-assembly-wi
+tags        : {c++, assembly, x86-64, undefined-behavior...}
+body        : <p>I am writing a low-level routine in C++ that mixes inline assembly (or an external <code>.s</code> file) to inspect or modify the current stack frame.</p>
+              <p>Here is an example:</p>
+              <pre class="lang-cpp prettyprint-override"><code>#include &lt;iostream&gt;
+              
+              extern &quot;C&quot; void custom_stack_inspect();
+              
+              void target_function() {
+                  int x = 42;
+                  custom_stack_inspect();
+              }
+              
+              int main() {
+                  target_function();
+                  return 0;
+              }
+              </code></pre>
+              <p>And the assembly:</p>
+              <pre class="lang-none prettyprint-override"><code>.global custom_stack_inspect
+              custom_stack_inspect:
+                  # What is the portable or ABI-compliant way to peek at caller's local 'x' here?
+                  ret
+              </code></pre>
+              <p>In x86_64 (System V vs. MSVC ABI), how does the compiler guarantee where local variables like <code>x</code> live relative to <code>rbp</code> or <code>rsp</code>, especially when optimizations (<code>-O2</code> / <code>-O3</code>) eliminate the base pointer?</p>
+              <p>What exact C++ rules or Undefined Behavior clauses are violated if an assembly routine manually walks up the stack frame chain?</p>
+              
+
+question_id : 80010771
+title       : Create a Frame that contains many different Series objects
+link        : https://stackoverflow.com/questions/80010771/create-a-frame-that-contains-many-different-series-objects
+tags        : {mojolang}
+body        : <p>I am new to Mojo. I want to create a Frame object that contains a lot of Series(name: String, values) objects. The Series part works without errors, the Fame part doesn't work.</p>
+              <pre><code>from std.collections import Dict
+              from std.utils import Variant
+              
+              
+              struct Series[T: Copyable &amp; Deinitable]:
+                  var name: String
+                  var values: List[Self.T]
+              
+                  def __init__(out self, name: String, values: List[Self.T]):
+                      self.name = name
+                      self.values = values.copy()
+              
+                  def __init__(out self, *, copy: Self):
+                      self.name = copy.name
+                      self.values = copy.values.copy()
+              
+              
+              struct Frame[T: Copyable]:
+                  var data: List[Series[_]]
+              
+                  def __init__(out self, data: Series):
+                      self.data = data
+              
+              
+              def main():
+                  # Create the series
+                  var foo = Series[Int64](&quot;foo&quot;, [1, 2, 3])
+                  var bar = Series[Float64](&quot;bar&quot;, [1.1, 2.2, 3.3])
+              
+                  # Copy of an existing  series
+                  var foo_copy = Series(copy=foo)
+              
+                  # Create DataFrame using the differebt column types
+                  var df = Frame((foo, bar))
+              
+                  print(df.data[0].name, df.data[0].values)
+                  print(df.data[1].name, df.data[1].values)
+                  print(foo_copy.values)
+              </code></pre>
+              
+
+question_id : 80010770
+title       : throwing exceptions to specific parts of the code in python
+link        : https://stackoverflow.com/questions/80010770/throwing-exceptions-to-specific-parts-of-the-code-in-python
+tags        : {python, exception}
+body        : <p>I'm attempting to create a variable type, and I want an error to occur if you make one of the values greater than 12 or less then 1 that points to where the value was changed.</p>
+              <pre class="lang-py prettyprint-override"><code>class Date:
+                  def __init__(self, month, day):
+                      self.month = int(month)
+                      self.day = int(day)
+              
+                      if self.month &gt; 12 or self.month &lt; 1:
+                          # Throw error
+                          pass
+              </code></pre>
+              
+
+question_id : 80010769
+title       : Cloud Run validateOnly: how do I verify success?
+link        : https://stackoverflow.com/questions/80010769/cloud-run-validateonly-how-do-i-verify-success
+tags        : {google-cloud-platform, google-cloud-run}
+body        : <p>I am using Cloud Run Admin API v2 <code>projects.locations.services.patch</code> with <code>validateOnly=true</code>, <code>allowMissing=false</code> and <code>forceNewRevision=true</code>.</p>
+              <p>The request returned HTTP 200. The response had the following structure; identifiers are replaced with placeholders and most metadata is omitted:</p>
+              <pre class="lang-json prettyprint-override"><code>{
+                &quot;name&quot;: &quot;projects/PROJECT/locations/REGION/operations/OPERATION_ID&quot;,
+                &quot;metadata&quot;: {
+                  &quot;@type&quot;: &quot;type.googleapis.com/google.cloud.run.v2.Service&quot;,
+                  &quot;name&quot;: &quot;projects/PROJECT/locations/REGION/services/SERVICE&quot;
+                }
+              }
+              </code></pre>
+              <p>The metadata contained the proposed Service configuration. The top-level <code>done</code>, <code>response</code> and <code>error</code> fields were absent.</p>
+              <p>A subsequent Operation GET using the deployment identity returned 403. A later GET using an account with project-level Cloud Run Viewer access returned 404. I did not establish immediate retrievability. Independent readbacks showed no Service, revision or traffic changes.</p>
+              <p><a href="https://google.aip.dev/151" rel="nofollow noreferrer">AIP-151</a> describes validate-only outcomes as an immediate error, completed success, or a named nonterminal Operation that clients can poll until completion.</p>
+              <p>The <a href="https://docs.cloud.google.com/run/docs/reference/rest/v2/projects.locations.services/patch" rel="nofollow noreferrer">Cloud Run PATCH reference</a> documents validation without resource changes, but I could not find Cloud Run-specific completion or Operation-retention 
+              behaviour.</p>
+              <p>What is the supported way to confirm successful validation for Cloud Run v2? Should this Operation be polled to completion, and does <code>forceNewRevision=true</code> affect that behaviour?</p>
+              <p>I am not treating the later 404 as proof of non-persistence or HTTP 200 as proof of terminal completion.</p>
+              
+
+question_id : 80010767
+title       : How to copy both a jar and its source jar to a specific folder in one command?
+link        : https://stackoverflow.com/questions/80010767/how-to-copy-both-a-jar-and-its-source-jar-to-a-specific-folder-in-one-command
+tags        : {maven, dependency-management, maven-dependency-plugin}
+body        : <p>I am trying to copy a jar and its source jar into a specific folder without needing to do 2 runs of the same command.</p>
+              <p>I am well aware of <code>mvn dependency:copy-dependencies</code>, which does a good job of copying the jar file to the <code>./target/dependency/</code> folder, which is great.</p>
+              <p>I am also aware of <code>mvn dependency:copy-dependencies -Dclassifier=sources</code>, which does the same, but for source files.</p>
+              <p>But how do I accomplish both in a single command?</p>
+              <p>The best that I have been able to manage has been to run each in a separate run, which is not ideal.</p>
+              <p>I have also explored some of the commandline options for that plugin. Namely, the <code>-Dclassifier</code>, the <code>-DincludeClassifiers</code>, <code>-Dtypes</code>, and <code>-DincludeTypes</code>, all to no avail.</p>
+              <p>And for context, here is my pom file.</p>
+              <pre class="lang-xml prettyprint-override"><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;&gt;
+                &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+                &lt;groupId&gt;com.mycompany.app&lt;/groupId&gt;
+                &lt;artifactId&gt;my-app&lt;/artifactId&gt;
+                &lt;version&gt;1&lt;/version&gt;
+                &lt;dependencies&gt;&lt;!-- Source: https://mvnrepository.com/artifact/ch.qos.logback/logback-classic --&gt;
+                  &lt;dependency&gt;
+                  &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+                  &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+                  &lt;version&gt;1.6.5&lt;/version&gt;
+                  &lt;scope&gt;compile&lt;/scope&gt;
+                  &lt;/dependency&gt;
+                &lt;/dependencies&gt;
+              &lt;/project&gt;
+              </code></pre>
+              <p>And my source directory is the standard Java source directory used for Maven. Aka, sources in <code>src/main/java</code>, tests in <code>src/test/java</code>, etc. Nothing out-of-ordinary here. And for the sake of this example, the problem is demonstrable without any sources or 
+              tests at all.</p>
+              <p>And the reason why I need it to be in one command is because I have &gt;100 modules, each taking significant amounts of time to run through. 1 pass takes several minutes, and I don't want to do 2. Plus, it slows down iteration speed.</p>
+              
+
+question_id : 80010762
+title       : My configurations for Security Onion has not verified successfully in Oracle Virtual Box. What should I do?
+link        : https://stackoverflow.com/questions/80010762/my-configurations-for-security-onion-has-not-verified-successfully-in-oracle-vir
+tags        : {security, virtualbox, network-monitoring}
+body        : <p>I am working on a college assignment that wants me to capture, analyze, and report on PCAP packets.<br />
+              I successfully installed Security Onion on my Windows 11 OS using the latest ISO image and booted it from Oracle VirtualBox.</p>
+              <p>Note: The operating system for the current virtual machine called Security-Onion-IDS-Lab-New is Oracle Linux 9.x (64-bit)</p>
+              <p>I made the following configurations upon following the prompts.</p>
+              <p>Method: Import</p>
+              <p>Hostname: sec-onion-10-26</p>
+              <p>NIC: enp0s3 08:00:27:96:80:a5    Link UP</p>
+              <p>Static IPv4: <a href="http://192.168.1.5/24" rel="nofollow noreferrer">192.168.1.5/24</a></p>
+              <p>Gateway Address: 192.168.1.1</p>
+              <p>DNS servers: 8.8.8.8, 8.8.4.4</p>
+              <p>searchdomain.local</p>
+              <p>Keep default Docker IP range</p>
+              <p>Direct connection</p>
+              <p>Email address: secadmin26@securityhack.org</p>
+              <p>Password: hidden for privacy use</p>
+              <p>Subnet (web interface): <a href="http://192.168.1.0/24" rel="nofollow noreferrer">192.168.1.0/24</a></p>
+              <p>However, once I clicked on the confirm button to proceed, I ended up with this error in the attached screenshot:</p>
+              <p><a href="https://i.sstatic.net/7AzjoL2e.png" rel="nofollow noreferrer">Oracle Virtual Box terminal error</a></p>
+              <p>Error: Failed to sync repos
+              Error: Setup encountered an unrecoverable failure, exiting.</p>
+              <p>For the past three days, I spent a lot of hours using ChatGPT to guide me through resolving the issue. It did an excellent job, and brought me closer to a solution. However, after a long period of time, I decided to stop and find YouTube videos and look back at the documentation 
+              links provided in the lab steps. However, they only explained the configuration process and were not of any additional use to me.</p>
+              <p>I tried recreating the virtual machines and repeating the same configuration processes with the same information, but I keep getting the same error. I have to complete my assignment before tonight, and I can't make any extensions past that.</p>
+              
+
+question_id : 80010759
+title       : Retrieve parameters of a redirected website on aiohttp
+link        : https://stackoverflow.com/questions/80010759/retrieve-parameters-of-a-redirected-website-on-aiohttp
+tags        : {python, aiohttp}
+body        : <p>The code below contains a asynchronous <code>def</code> that sends a request to a <em>OAuth2</em> server endpoint and when the server returns <em>200</em>, the client is redirected to the given redirect point called <code>redirect_uri</code> which is inside of <code>params</code> 
+              and inserts two parameters at the url which are <code>code</code> and <code>state</code> (<em>state</em> is optional based off the API's official documents).</p>
+              <pre><code>async def get_access_token(self, refreshing):
+                  async with self.session.get(&quot;oauth2 api endpoint&quot;, params={
+                      &quot;response_type&quot;: &quot;code&quot;,
+                      &quot;client_id&quot;: self.client_id,
+                      &quot;redirect_uri&quot;: &quot;https://example.com&quot; # &lt;&lt; Redirected automatically to this when the response is 200.
+                  }, headers={
+                      &quot;Content-Type&quot;: &quot;application/json&quot;,
+                      &quot;User-Agents&quot;: &quot;api/v0.0.1a&quot;
+                  }) as response:
+                      self.__log(response.url, &quot;info&quot;) 
+                          
+                      if response.status == 200:
+                          self.access_token = response.url.query.get(&quot;code&quot;) # &lt;&lt; Get code paramater here
+                          
+                          return self.access_token
+                      else: 
+                          self.__log(f&quot;Server returned {response.status} and {response.json if not response.text else response.text}.&quot;, &quot;err&quot;)
+              </code></pre>
+              <p>The main issue here is that the <code>response.url</code> doesn't change to <code>redirect_uri</code> to retrieve the parameters using <code>url.query.get</code> on the code but it's root API page.</p>
+              <p><em>Example:</em></p>
+              <pre><code>GET &gt;&gt; &quot;https://api.web/login&quot; 
+              &gt;&gt; if 200 &gt;&gt; &quot;https://redirecting.url/?code=placeholder&amp;state=placeholder&quot; 
+              &gt;&gt; but instead &gt;&gt; &quot;https://api.web/onboarding&quot; == the value for response.url
+              </code></pre>
+              <p>(Disclaimer: this code belongs into a <em>class</em>, which explains why there's <em>self</em> and a <em>private</em> function being called in this function and it can be ignored)</p>
+              
+
+question_id : 80010757
+title       : Playwright JavaScript: MakeMyTrip flight search shows NETWORK PROBLEM despite HTTP 200 responses
+link        : https://stackoverflow.com/questions/80010757/playwright-javascript-makemytrip-flight-search-shows-network-problem-despite-ht
+tags        : {javascript, chromium, ui-automation, playwright}
+body        : <h3>Problem description</h3>
+              <p>I am automating the flight search functionality on the MakeMyTrip website using Playwright with JavaScript.</p>
+              <p>When I open MakeMyTrip manually in Chrome, enter the flight search details, and click the Search button, the flight results load normally.</p>
+              <p>However, when I execute the same flow using Playwright, the browser navigates to the flight search results URL, but the expected flight results do not load. Instead, I see a <code>NETWORK PROBLEM</code> message or a page displaying <code>200-OK</code>.</p>
+              <h3>Expected behavior</h3>
+              <p>After clicking the Search button, Playwright should navigate to the flight results page and display the available flights, similar to the behavior observed when using Chrome manually.</p>
+              <h3>What I have tried</h3>
+              <ol>
+              <li><p>Waiting for different page load states using <code>page.waitForLoadState()</code>.</p>
+              </li>
+              <li><p>Waiting for the flight search URL using <code>page.waitForURL()</code>.</p>
+              </li>
+              <li><p>Trying to clear cookies using <code>page.context().clearCookies()</code>.</p>
+              </li>
+              </ol>
+              <p>None of these steps has resolved the issue.</p>
+              <p>I would appreciate suggestions for diagnosing the root cause rather than simply increasing the Playwright timeout.</p>
+              <p><strong>Environment</strong></p>
+              <ul>
+              <li><p>Automation framework: Playwright</p>
+              </li>
+              <li><p>Language: JavaScript</p>
+              </li>
+              <li><p>Browser: Chromium</p>
+              </li>
+              <li><p>Website: MakeMyTrip</p>
+              </li>
+              <li><p>Execution: Automated browser test</p>
+              </li>
+              </ul>
+              
+
+question_id : 80010756
+title       : Import hook at the AST level
+link        : https://stackoverflow.com/questions/80010756/import-hook-at-the-ast-level
+tags        : {python, python-3.x, python-importlib, import-hooks}
+body        : <p>Is there an Import Hook available for hooking into after the source code has been parsed into AST but before it is compiled?</p>
+              <p>I am looking for a way to keep using most of the existing Python import machinery but modify the source code before it is compiled.</p>
+              <p>I realise there is this, quite old, post along the same lines but that doesn't hook into the import process in quite the place I was looking for: <a 
+              href="https://stackoverflow.com/questions/43571737/how-to-implement-an-import-hook-that-can-modify-the-source-code-on-the-fly-using">How to implement an import hook that can modify the source code on the fly using importlib?</a></p>
+              <p>A partial solution but how do I get to the source code from the module in <code>custom_import</code>?</p>
+              <pre><code># Module1.py
+              print(&quot;in Module 1&quot;)
+              </code></pre>
+              <pre><code># Main.py
+              import builtins
+              old_imp = builtins.__import__
+              
+              def custom_import(*args, **kwargs):
+                  mod = old_imp(*args, **kwargs)
+                  print(&quot;in custom_import&quot;, mod)
+                  return mod
+              
+              builtins.__import__ = custom_import
+              
+              print(&quot;in Main.py before import&quot;)
+              import Module1
+              print(&quot;in Main.py after import&quot;)
+              </code></pre>
+              <p>Another partial attempt but a bit longer.  However, do I actually need to use <code>CustomFinder</code> or is there some way I can use the default finder but tell that to use my <code>CustomLoader</code> instead of its default loader?</p>
+              <pre><code>lazy import sys, os, ast
+              lazy import importlib.abc, importlib.util
+              
+              class CustomFinder:
+                  @staticmethod
+                  def find_spec(fullname, path, target):
+                      filename = f&quot;{fullname}.py&quot;
+                      if os.path.exists(filename):
+                          spec = importlib.util.spec_from_loader(fullname, CustomLoader(), origin=filename)
+                          return spec
+                      else:
+                          return None
+              
+              class CustomLoader(importlib.abc.SourceLoader):
+                  @staticmethod
+                  def get_data(path):
+                      with open(path) as f:
+                          src_tree = ast.parse(f.read())
+                      src_tree_modified = modify(src_tree)
+                      print(ast.unparse(src_tree_modified))
+                      return src_tree_modified
+                  @staticmethod
+                  def get_filename(fullname):
+                      return f&quot;{fullname}.py&quot;
+              
+              def modify(node):
+                  try:
+                      node.body[0].value.args[0].value += &quot; added text&quot;
+                  except IndexError:
+                      pass
+                  return node
+              
+              
+              if __name__ == &quot;__main__&quot;:
+                  sys.meta_path.insert(0, CustomFinder())
+                  sys.path_hooks.insert(0, CustomLoader)
+              
+                  import Module1
+              </code></pre>
+              
+
+question_id : 80010749
+title       : How can I format a large number so that it contains a comma (group separator) only between the 100s and 1000s digits in a currency string?
+link        : https://stackoverflow.com/questions/80010749/how-can-i-format-a-large-number-so-that-it-contains-a-comma-group-separator-on
+tags        : {c#, .net, numbers, number-formatting}
+body        : <p>I need help formatting a large number into a currency string that contains a comma (group separator) only between the 3rd and 4th digits (i.e. between the 100s and 1000s) -- but not between any other groups of three digits.  E.g. my purpose is to convert the expression: 
+              <code>100000000</code> to <code>1 000 000 ,000</code> -- i.e. to have the comma only before the last three digits whatever the length of the number.</p>
+              <p>This is what I use but it converts <code>1000000</code> to <code>1, 000, 000</code>:</p>
+              <pre><code>double value;
+              if (double.TryParse(txtMontant1.Text, out value))
+              {
+                  txtMontant11.Text = value.ToString(&quot;### ### ###&quot;); 
+              }
+              </code></pre>
+              
+
+question_id : 80010744
+title       : How to quickly transition into blockchain development
+link        : https://stackoverflow.com/questions/80010744/how-to-quickly-transition-into-blockchain-development
+tags        : {advice, blockchain, jobs}
+body        : <p>I am looking to transition into the blockchain field, but the technical information available online is disorganized and overwhelming. I would like to gain a better understanding of the various specializations within blockchain—what they entail and what the work actually looks 
+              like. Given current industry trends, which direction would be the best to pursue, and what specific technologies should I learn for that path? I would greatly appreciate advice from an experienced professional in the field.</p>
+              <p>Additionally, my primary goal is to secure a remote position. Within the software industry, which area offers the best opportunities for remote work? I would welcome any expert insights on this, as well as recommendations for the best platforms or channels to find remote job 
+              openings.</p>
+              
+
+
+
+

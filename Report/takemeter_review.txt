@@ -1,0 +1,1212 @@
+﻿TAKEMETER PROJECT REVIEW
+
+========================================
+FILE: README.md
+========================================
+# TakeMeter
+> **### ðŸ‘‹ Start here**
+
+>
+
+> **New to this repo? Read [RUNNING.md](RUNNING.md) first** â€” setup, the
+
+> notebook, the baseline, and what to do when something breaks.
+
+>
+
+> Once `python test.py` passes:
+
+>
+
+> ```bash
+
+> head -5 data/practice_labels.csv Â  Â  # the shape your labels.csv needs
+
+> ```
+
+>
+
+> Then open `takemeter.ipynb` **in this folder** â€” in VS Code, or with
+
+> `jupyter notebook` if you prefer. Pick the kernel: the `.venv` inside this
+
+> project. Run section 1, which reports the hardware you'll be training on.
+
+> Everything else waits until you have data.
+
+>
+
+> Nothing to upload, nothing to connect, no accounts and no keys. The notebook
+
+> runs on your machine and writes next to your code.
+
+>
+
+> ****The rest of this file is your submission.**** Fill it in as you go.
+
+---
+<!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+Â  Â  Â HOW TO USE THIS FILE
+
+Â  Â  Â Unit 5 asks for the first five sections. Unit 6 adds the five below them.
+
+Â  Â  Â Everything is pasted as TEXT. No screenshots, no images.
+
+Â  Â  Â âš ï¸ The confusion matrix especially. The notebook prints one as a markdown
+
+Â  Â  Â table, ready to copy. A screenshot of a matrix earns nothing. Paste the
+
+Â  Â  Â table.
+
+Â  Â  Â â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• UNIT 5 â€” THE BUILD â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+
+## What This Does
+
+<!-- Your community, and what your classifier sorts posts into. Three or four
+     sentences. -->
+
+TakeMeter is a text-classification project using public posts from [r/learnprogramming](https://www.reddit.com/r/learnprogramming/). The goal is to train a model to categorize posts according to a consistent, community-specific label taxonomy. Initial research documents 30 posts and examines technical specificity, post purpose, and supporting context as possible distinctions. The final labels will be selected and tested in Milestone 2; no trained classifier is being claimed yet.
+
+---
+## Label Taxonomy
+
+The classifier evaluates the amount of relevant supporting context in each post's title and body. Every post receives exactly one of the following three labels. The examples below are the selected candidate posts documented in `research/milestone2_taxonomy.md`; their descriptions should be checked against the original Reddit posts before final submission.
+
+### `low_context`
+
+**Definition:** A post that states a question, opinion, or experience but gives no meaningful explanation or supporting background.
+
+**Example 1 â€” Python versus JavaScript:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1t3f1fi/). The author questions why Python is recommended for beginners when React appears in job listings, without providing meaningful details about their own career goals or circumstances.
+
+**Example 2 â€” Choosing a first programming language:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/vli5zb/). The author asks which language would make it easier to learn other languages, without describing their experience or intended applications.
+
+### `some_context`
+
+**Definition:** A post that provides relevant background, a specific topic, or a previous difficulty but does not sufficiently develop the central situation.
+
+**Example 1 â€” Learning Git from scratch:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1wlmea9/). The author identifies themselves as a beginner and requests Git learning resources, but does not describe a specific Git task or attempt.
+
+**Example 2 â€” Understanding C++ pointers:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1hla3ri/). The author identifies pointers as confusing and mentions previous attempts to understand them, but provides no code example or concrete use case.
+
+### `detailed_context`
+
+**Definition:** A post that includes multiple concrete, relevant details that work together to explain the author's problem, experience, or argument.
+
+**Example 1 â€” Python versus JavaScript:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1qc5q4r/). The author describes office and data-related work, prior web-development learning, interests, and reasons for considering Python.
+
+**Example 2 â€” Learning software design:** [Reddit post](https://www.reddit.com/r/learnprogramming/comments/1s4cvsb/). The author explains their Python and C++ knowledge, experience with small scripts, and difficulties structuring larger projects.
+
+### The hardest boundary
+**Which two labels:**
+**The decision rule I used every time:**
+<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
+
+Â  Â  Â if the tone is heated." -->
+
+---
+## The Dataset
+<!-- Where you collected from, how you labelled, your counts, and three hard
+
+Â  Â  Â cases. -->
+
+**Where the posts came from:** Public posts in [r/learnprogramming](https://www.reddit.com/r/learnprogramming/). The initial research log records 30 post URLs in `research/milestone1_observations.md`; this is not yet the labeled training dataset.
+**How I labelled them:** Not started. The label taxonomy will be defined first; the initial 20 training examples must be labeled independently before any optional AI-assisted pre-labeling. <!-- Cold first? Pre-labelled with AI and corrected?
+
+Say so plainly â€” the disclosure is required, not penalised. -->
+
+**Counts per label:** Pending dataset collection and labeling; no per-label counts are available yet.
+| Label | Count | Share |
+
+|---|---|---|
+
+| Â | Â | Â |
+
+| Â | Â | Â |
+
+| Â | Â | Â |
+
+| **Total** | Â | 100% |
+
+**Three hard cases**
+<!-- Any post that made you pause: what it was, which two labels it could have
+
+Â  Â  Â been, and what you chose. These are worth more than the easy 190. -->
+
+**1.**
+> **The post:**
+
+>
+
+> **Could have been:**
+
+>
+
+> **I chose, because:**
+
+**2.**
+> **The post:**
+
+>
+
+> **Could have been:**
+
+>
+
+> **I chose, because:**
+
+**3.**
+> **The post:**
+
+>
+
+> **Could have been:**
+
+>
+
+> **I chose, because:**
+
+---
+## The Training Run
+<!-- Your starting model, your settings, and anything you changed and why. -->
+
+**Base model:** Not recorded yet; confirm the model identifier in the notebook before training.
+****Settings:** Training has not run. Record the actual epochs, learning rate, batch size, seed, and other settings after configuring the notebook.** <!-- epochs, learning rate, batch size, seed -->
+
+**Anything I changed from the defaults, and why:** Not applicable yet; record any actual changes when training.
+****Split sizes:** Not available until the dataset is created and split.** <!-- train / val / test, and per-label counts in the test
+
+split. If a label had fewer than about 8 in test, say so â€” it explains a lot
+
+of next unit's variance. -->
+
+---
+## How I Used AI
+
+<!-- Two specific moments â€” what you asked, what came back, what you changed.
+     Plus disclose any AI pre-labelling. -->
+
+**Moment 1 â€” Community research and documentation**
+
+- **What I asked for:** Help finding the top candidate posts from r/learnprogramming. 
+- **What came back:** A research-log format, candidate distinctions, post URLs, and suggested summaries.
+- **What I changed:** Compiled the research document with 30 entries, supporting examples, ambiguous cases, and conclusions. I must still independently verify the posts and observations before treating them as confirmed research.
+
+**Moment 2 â€” README preparation**
+
+- **What I asked for:** 
+- **What came back:** 
+- **What I changed:** 
+
+**Pre-labelling disclosure:** No training dataset has been labeled or AI-pre-labeled yet. AI-generated research-log descriptions are not training labels. This disclosure will be updated if AI-assisted pre-labeling is used later.
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• UNIT 6 â€” THE TEST â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Â  Â  Â Don't fill these in during unit 5.
+
+Â  Â  Â â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+
+---
+## Baseline vs. Trained
+<!-- Both models on the same posts. `python baseline.py --trained results.json`
+
+Â  Â  Â prints this table for you. -->
+
+| Measure | Baseline | Trained | Difference |
+
+|---|---|---|---|
+
+| Overall accuracy | Â | Â | Â |
+
+| Macro F1 | Â | Â | Â |
+
+| F1 â€” `label_one` | Â | Â | Â |
+
+| F1 â€” `label_two` | Â | Â | Â |
+
+**What I predicted before I looked:**
+<!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
+
+Â  Â  Â prediction made afterwards isn't one. -->
+
+**What the gap actually means:**
+<!-- If the baseline matched your trained model, your fine-tuning added
+
+Â  Â  Â nothing â€” and that is a real finding, not a failure. Say it plainly. -->
+
+---
+## Run Log â€” Before
+<!-- Five criteria across three seeds. The notebook's section 6 prints the
+
+Â  Â  Â spread table; the Target and Verdict columns are yours. -->
+
+| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+
+|---|---|---|---|---|---|
+
+| 1. Â | Â | Â | Â | Â | Â |
+
+| 2. Â | Â | Â | Â | Â | Â |
+
+| 3. Â | Â | Â | Â | Â | Â |
+
+| 4. Â | Â | Â | Â | Â | Â |
+
+| 5. Â | Â | Â | Â | Â | Â |
+
+### Confusion matrix
+<!-- âš ï¸ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
+
+Â  Â  Â An image of a matrix earns nothing. -->
+
+| true \ predicted | Â | Â | Â |
+
+|---|---|---|---|
+
+| ****** | Â | Â | Â |
+
+| ****** | Â | Â | Â |
+
+| ****** | Â | Â | Â |
+
+**My biggest off-diagonal number, and what it means:**
+<!-- Not "the model made mistakes" â€” WHICH boundary it didn't learn, and which
+
+Â  Â  Â direction. "7 real analysis posts were called hot_take and only 3 went the
+
+Â  Â  Â other way" is a direction, not just an error rate. -->
+
+---
+## Verdicts and Diagnoses
+<!-- MET or MISSED against LAST UNIT's target. The target has to hold across
+
+Â  Â  Â all three seeds, not turn up sometimes. -->
+
+| # | Criterion | Target | Verdict | How I decided |
+
+|---|---|---|---|---|
+
+| 1 | Â | Â | Â | Â |
+
+| 2 | Â | Â | Â | Â |
+
+| 3 | Â | Â | Â | Â |
+
+| 4 | Â | Â | Â | Â |
+
+| 5 | Â | Â | Â | Â |
+
+**Diagnoses**
+<!-- For each miss: the cause, and how you know. The four common causes are:
+
+Â  Â  Â too few examples for a label, a boundary you applied inconsistently, a
+
+Â  Â  Â genuinely hard label pair, and a task the model can't reach from this
+
+Â  Â  Â much data.
+
+Â  Â  Â âš ï¸ Use your agreement report as evidence. It is the only instrument you
+
+Â  Â  Â have that can tell a LABELLING problem from a MODEL problem, and this
+
+Â  Â  Â section is graded on whether you used it that way. -->
+
+---
+## Agreement Report
+<!-- Your rate against the staff set, and every disagreement adjudicated.
+
+Â  Â  Â Remember you labelled these 30 under the STAFF taxonomy in
+
+Â  Â  Â data/staff_taxonomy.md, not your own â€” so every argument below is made
+
+Â  Â  Â from those definitions and those decision rules. -->
+
+****Agreement rate:**** **___ / 30 = ___**%
+
+<!-- Nobody grades this number. A 60% who argues every disagreement from the
+
+Â  Â  Â stated rules beats a 95% who wrote "staff was right" nine times. Several
+
+Â  Â  Â of the 30 were chosen because they're genuinely ambiguous â€” you should be
+
+Â  Â  Â winning some of these. -->
+
+**Disagreements**
+<!-- Three lines each: the post, both labels, and who you think is right and
+
+Â  Â  Â why â€” grounded in the staff definitions you were both applying.
+
+Â  Â  Â Then sort each into one of three piles:
+
+Â  Â  Â  Â (a) the rule covered it and I applied it loosely â†’ a consistency problem
+
+Â  Â  Â  Â (b) the rule genuinely doesn't say Â  Â  Â  Â  Â  Â  Â  â†’ a gap in the definitions
+
+Â  Â  Â  Â (c) the rule is ambiguous here and my reading is defensible â†’ argue it.
+
+Â  Â  Â  Â  Â  Â This is a legitimate win.
+
+Â  Â  Â Pile (a) is the one that matters most for your diagnosis: if you applied a
+
+Â  Â  Â written rule two different ways on 30 posts, that is direct evidence about
+
+Â  Â  Â what you did across your own 200. -->
+
+**1.**
+> **The post:**
+
+>
+
+> **Staff said / I said:**
+
+>
+
+> **My call, and why:**
+
+>
+
+> **Which pile:**
+
+**2.**
+> **The post:**
+
+>
+
+> **Staff said / I said:**
+
+>
+
+> **My call, and why:**
+
+>
+
+> **Which pile:**
+
+**What the pattern in my disagreements tells me:**
+---
+## The Improvement
+**What I changed:**
+**Which diagnosis pointed at it:**
+### Run Log â€” After
+| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+
+|---|---|---|---|---|---|
+
+| 1. Â | Â | Â | Â | Â | Â |
+
+| 2. Â | Â | Â | Â | Â | Â |
+
+| 3. Â | Â | Â | Â | Â | Â |
+
+| 4. Â | Â | Â | Â | Â | Â |
+
+| 5. Â | Â | Â | Â | Â | Â |
+
+**Did it help, and how do I know:**
+<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
+
+Â  Â  Â interesting result and earns full credit. -->
+
+---
+## What's Still Broken
+<!-- For each criterion still missed: what you'd do, and why you stopped. -->
+
+**The gap between what I meant my labels to capture and what the model
+
+learned:**
+
+<!-- Two sentences. Your confusion matrix is the evidence. -->
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Â  Â  Â SUBMISSION CHECKLIST â€” unit 5
+
+Â  Â  Â  Â [ ] criteria.md has five numbered criteria, each naming a NUMBER
+
+Â  Â  Â  Â [ ] Each has a reason underneath tied to your data or taxonomy
+
+Â  Â  Â  Â [ ] labels.csv: at least 150 rows, text/label/note, ONE file not split
+
+Â  Â  Â  Â [ ] No label above 70%
+
+Â  Â  Â  Â [ ] All five unit 5 sections have real content
+
+Â  Â  Â  Â [ ] Label Taxonomy includes the decision rule for your hardest boundary
+
+Â  Â  Â  Â [ ] The Dataset includes three hard cases
+
+Â  Â  Â  Â [ ] results.json and test_split.csv committed (the notebook does this)
+
+Â  Â  Â  Â [ ] At least four new commits
+
+Â  Â  Â  Â [ ] Repository URL submitted â€” WRITE IT DOWN
+
+Â  Â  Â SUBMISSION CHECKLIST â€” unit 6
+
+Â  Â  Â  Â [ ] Baseline vs. Trained table, with your prediction written beforehand
+
+Â  Â  Â  Â [ ] Run Log â€” Before, five criteria across three seeds
+
+Â  Â  Â  Â [ ] Confusion matrix TYPED AS A MARKDOWN TABLE
+
+Â  Â  Â  Â [ ] A verdict on every criterion
+
+Â  Â  Â  Â [ ] A diagnosis for every miss, using the agreement report as evidence
+
+Â  Â  Â  Â [ ] Agreement Report with every disagreement adjudicated
+
+Â  Â  Â  Â [ ] One improvement, with Run Log â€” After
+
+Â  Â  Â  Â [ ] What's Still Broken
+
+Â  Â  Â  Â [ ] results_three_seeds_before.json, results_three_seeds_after.json,
+
+Â  Â  Â  Â  Â  Â baseline_results.json and
+
+Â  Â  Â  Â  Â  Â agreement_results.json committed
+
+Â  Â  Â  Â [ ] At least four new commits
+
+Â  Â  Â  Â [ ] The SAME repository URL as last unit
+
+Â  Â  Â Do not delete and recreate this repository.
+
+Â  Â  Â â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+
+---
+ðŸ“– ****How to run this project: [RUNNING.md](**RUNNING.md**)****
+
+========================================
+FILE: criteria.md
+========================================
+# Acceptance criteria â€” TakeMeter
+
+Five criteria that say what "working" means for this classifier, written in
+unit 5 **before** anything was trained.
+
+**All five are yours this time.** None are given. You've had two projects of
+practice.
+
+An acceptance criterion names a number. *"The model is accurate"* is an
+opinion. *"Every label has an F1 of at least 0.60 on the held-out set"* is a
+criterion.
+
+Under each, write a sentence or two on **why that number**. A reason that says
+something about your data or your taxonomy earns credit â€” *"I picked 0.60 F1
+for `reaction` because it's my smallest label and I only have about 50
+examples of it"*. A reason that could be attached to any project does not.
+
+> Missing your own targets next unit costs you nothing. Setting a target so
+> easy you can't miss it does.
+
+---
+
+## Pick numbers you can defend
+
+Not numbers that sound impressive. Three labels means a coin-flip guesser gets
+about 33%, so a target of 0.40 is barely a target. Your number should sit
+somewhere you'd honestly call useful.
+
+**Cover at least three of these five areas.** They're here as prompts, not as a
+form to fill in â€” a criterion that fits none of them is fine if it names a
+number.
+
+| Area | A question it could answer |
+|---|---|
+| Overall accuracy | How often does it need to be right to be worth using? |
+| Per-label performance | Is one label allowed to be much worse than the others? |
+| Balance | How lopsided can your label counts get before it's a problem? |
+| Consistency | If someone else labelled the same posts, how often should you agree? |
+| Confidence | Should a confident prediction be right more often than an unsure one? |
+
+Two things worth knowing before you pick numbers, because both will affect
+whether you hit them:
+
+- **Your smallest label will have the jumpiest score.** If a label has 50
+  examples, about 8 land in the test split. An F1 computed on 8 examples moves
+  a lot between seeds. A target for that label should be looser than one for
+  your biggest label, and saying so is a good reason.
+- **Unit 6 tests across three seeds, and the target has to hold across all
+  three.** A target of 0.65 against results of 0.71, 0.62, 0.68 is a **miss**.
+  Pick with that in mind â€” it is stricter than it first sounds.
+
+---
+
+## 1. Overall classification accuracy
+
+The classifier must achieve at least **65% overall accuracy** on the held-out test set for **each of the three training seeds**.
+
+**Why this target:** I chose 65% because the classifier distinguishes three levels of supporting context, and posts near the `some_context` / `detailed_context` boundary can be difficult to separate. I consider 65% a useful target for a small, three-label dataset without expecting every borderline case to be classified correctly.
+
+**How to check:** For each seed, divide correctly predicted held-out posts by the total number of held-out posts. Each seed must reach at least 0.65.
+
+---
+
+## 2. Minimum F1 for every label
+
+Each label â€” `low_context`, `some_context`, and `detailed_context` â€” must achieve an **F1 score of at least 0.55** on the held-out test set for **each of the three training seeds**.
+
+**Why this target:** I chose 0.55 because distinguishing `some_context` from `detailed_context` can be ambiguous, and the planned dataset of approximately 200 posts may leave relatively few test examples per label. I still want acceptable performance for every context level, rather than good overall accuracy driven by only one label.
+
+**How to check:** Calculate F1 separately for each of the three labels for each seed. All nine label-by-seed scores must be at least 0.55.
+
+---
+
+## 3. Dataset label balance
+
+No single label may account for **more than 60%** of the complete labeled dataset in `labels.csv`.
+
+**Why this target:** I chose 60% so all three context levels are represented without one category dominating the examples used for training. This also sets a stricter balance limit than the assignment's 70% maximum.
+
+**How to check:** For each label, divide its row count in `labels.csv` by the total number of labeled rows. The largest share must be at most 0.60.
+
+---
+
+## 4. Independent labeling consistency
+
+Two people independently applying the TakeMeter taxonomy to the **same 20 Reddit posts** must agree on at least **75%** of their labels (**15 of 20 posts**).
+
+**Why this target:** I chose 75% because the distinction between `some_context` and `detailed_context` involves judgment even with a written boundary rule. Agreement on at least three out of four posts would show that another person can apply the taxonomy reasonably consistently while leaving room for difficult cases.
+
+**How to check:** Select and record the 20 post IDs before comparing labels. Each person labels the same title and body independently, using `low_context`, `some_context`, or `detailed_context` and the same decision rules. Count exact matches and divide by 20. The separate Unit 6 staff-taxonomy exercise does not measure this criterion.
+
+---
+
+## 5. Accuracy of high-confidence predictions
+
+For **each of the three training seeds**, held-out test predictions whose **highest predicted class probability is at least 0.80 (80%)** must achieve **at least 75% accuracy** among those qualifying predictions.
+
+**Why this target:** I chose 80% as the cutoff to focus on predictions the model considers relatively certain. I chose 75% accuracy because those predictions should be more reliable than the 65% overall accuracy target, even though borderline supporting-context posts can remain difficult.
+
+**How to check:** For each seed, take the maximum predicted probability across the three labels for each held-out post. Filter predictions with maximum probability >= 0.80, then divide the number correctly classified by the number qualifying. Record both counts. If zero predictions qualify for a seed, mark this criterion **not met / not evaluable for that seed**, never as passed; the criterion is met only if all three seeds have qualifying predictions and each qualifying subset reaches 0.75 accuracy.
+
+---
+
+<!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     UNIT 6 â€” read this before you change anything above.
+
+     If a criterion turns out to be BROKEN rather than merely unmet, you can
+     revise it, and that earns credit. But never delete or edit the original
+     line. Add the revision underneath, like this:
+
+        ## 2. Every label performs acceptably
+
+        The model performs well on all labels.
+
+        **Why this target:** ...
+
+        > **Revised in unit 6:** Every label has an F1 of at least 0.60 on
+        > the held-out set.
+        >
+        > **Why revised:** "performs well" gave me nothing to check. I
+        > couldn't produce a verdict from it at all.
+
+     That's a revision because the criterion couldn't be MEASURED.
+
+     Lowering a target because you missed it is not a revision, and it costs
+     you the point:
+
+        âœ— "Overall accuracy of at least 0.65" â†’ "at least 0.55", because
+          0.65 turned out to be optimistic for 200 examples.
+
+     A number you missed stays where it is, gets diagnosed, and gets a fix
+     attempted. That's where the points are.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+
+========================================
+FILE: research\milestone1_observations.md
+========================================
+# TakeMeter â€” Milestone 1: Community Exploration
+
+## 1. Selected Community
+
+**Community:** r/learnprogramming
+
+**Source:** https://www.reddit.com/r/learnprogramming/
+
+**Purpose:** Investigate how programming learners describe technical problems, request guidance, and share experiences.
+
+**Review target:** 30â€“40 public posts.
+
+## 2. Reading Log
+
+| #   | Post URL                                                    | Main topic                                     | Observed characteristics                                                                                               |
+| --- | ----------------------------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| 1   | https://www.reddit.com/r/learnprogramming/comments/1w2wmqg/ | Debugging existing code                        | Requests learning guidance; describes a knowledge gap                                                                  |
+| 2   | https://www.reddit.com/r/learnprogramming/comments/1osf2u3/ | Debugging techniques                           | Requests specific techniques; explains difficulty                                                                      |
+| 3   | https://www.reddit.com/r/learnprogramming/comments/1vsgs4m/ | First successful code                          | Shares achievement and personal experience                                                                             |
+| 4   | https://www.reddit.com/r/learnprogramming/comments/1mdqhqz/ | Building applications                          | Requests guidance about applying programming knowledge                                                                 |
+| 5   | https://www.reddit.com/r/learnprogramming/comments/dw0d4o/  | Starting a project                             | Requests general guidance about project development                                                                    |
+| 6   | https://www.reddit.com/r/learnprogramming/comments/1qc5q4r/ | Python vs. JavaScript                          | Beginner compares two languages using work experience, interests, and career goals; requests guidance                  |
+| 7   | https://www.reddit.com/r/learnprogramming/comments/sp4mln/  | Difficulty understanding loops                 | Describes specific programming concepts causing difficulty; asks whether struggling is normal                          |
+| 8   | https://www.reddit.com/r/learnprogramming/comments/1nwwbpm/ | Improving after graduation                     | Graduate describes Java and OOP experience; asks how to progress toward professional development                       |
+| 9   | https://www.reddit.com/r/learnprogramming/comments/1w0j79o/ | Starting independent projects                  | Understands basic concepts but struggles to begin projects; requests practical guidance without code examples          |
+| 10  | https://www.reddit.com/r/learnprogramming/comments/1ku2qbb/ | Sharing programming progress                   | Community discussion invites project updates, accomplishments, and challenges; encourages sharing source code          |
+| 11  | https://www.reddit.com/r/learnprogramming/comments/1t3f1fi/ | Python and JavaScript career relevance         | Questions why Python is recommended for beginners while JavaScript appears frequently in web-development jobs          |
+| 12  | https://www.reddit.com/r/learnprogramming/comments/1weghie/ | Programming career roadmap                     | Requests recommendations on languages, technical skills, and future employment; provides career goals                  |
+| 13  | https://www.reddit.com/r/learnprogramming/comments/rm4tu3/  | Frustration with JavaScript                    | Strong negative opinion about JavaScript supported by personal learning and career-change experiences                  |
+| 14  | https://www.reddit.com/r/learnprogramming/comments/1w8ur7a/ | Learning advanced programming and AI           | Lists existing Python and data skills; requests guidance on advanced topics and incorporating AI into learning         |
+| 15  | https://www.reddit.com/r/learnprogramming/comments/e2fiwa/  | JavaScript vs. Python syntax                   | Asks for technical differences between two languages; provides background knowledge and specific comparison questions  |
+| 16  | https://www.reddit.com/r/learnprogramming/comments/1uarnpn/ | Learning through practice instead of tutorials | Experienced developer offers strong recommendations based on professional and teaching experience                      |
+| 17  | https://www.reddit.com/r/learnprogramming/comments/1s4cvsb/ | Learning software design                       | Knows programming syntax but struggles with larger applications; describes limitations and asks for learning resources |
+| 18  | https://www.reddit.com/r/learnprogramming/comments/1qei6ew/ | Effective learning methods                     | Beginner describes C/C++ and Python knowledge; asks for practical strategies to learn programming                      |
+| 19  | https://www.reddit.com/r/learnprogramming/comments/1gz5z65/ | Documentation vs. video tutorials              | Shares personal experience and argues that reading documentation improves understanding                                |
+| 20  | https://www.reddit.com/r/learnprogramming/comments/tts6z9/  | Escaping tutorial dependence                   | Describes repeated reliance on tutorials and difficulty creating independent projects; requests advice                 |
+| 21  | https://www.reddit.com/r/learnprogramming/comments/1kivnvu/ | Perfectionism and programming confidence       | Describes self-doubt, fear of errors, and difficulty starting projects; combines emotional and practical concerns      |
+| 22  | https://www.reddit.com/r/learnprogramming/comments/1pmzjoe/ | Difficulty learning independently              | Describes a repeated copy-paste-and-debug workflow; expresses frustration about skill development and employment       |
+| 23  | https://www.reddit.com/r/learnprogramming/comments/1sr6qck/ | Beginner Git and GitHub resources              | Requests beginner-friendly tutorials; explains why a previously watched tutorial was unsuitable                        |
+| 24  | https://www.reddit.com/r/learnprogramming/comments/1wlmea9/ | Learning Git from scratch                      | Requests beginner learning resources; identifies limited experience with version control                               |
+| 25  | https://www.reddit.com/r/learnprogramming/comments/1kkrb3i/ | Understanding GitHub                           | Lists unfamiliar concepts such as branches and pull requests; requests step-by-step learning resources                 |
+| 26  | https://www.reddit.com/r/learnprogramming/comments/1hla3ri/ | Understanding C++ pointers                     | Asks what pointers are and why they are useful; mentions unsuccessful attempts to understand existing explanations     |
+| 27  | https://www.reddit.com/r/learnprogramming/comments/gh2gn9/  | Git tutorial for beginners                     | Author shares an educational resource and explains why they created it; offers guidance rather than requesting help    |
+| 28  | https://www.reddit.com/r/learnprogramming/comments/hz4jdf/  | Practical uses of C++ pointers                 | Describes partial understanding of pointers; requests accessible explanations and learning resources                   |
+| 29  | https://www.reddit.com/r/learnprogramming/comments/12xc0rf/ | Pointer concepts and beginner confusion        | Requests a conceptual explanation of pointers; also asks whether feeling overwhelmed by C++ is normal                  |
+| 30  | https://www.reddit.com/r/learnprogramming/comments/1lf9cwi/ | GitHub for new programmers                     | Describes confusion when using GitHub; requests reassurance and beginner-level guidance                                |
+
+## 3. Candidate Distinctions
+
+The r/learnprogramming community contains discussions about debugging, programming fundamentals, starting projects, and learning experiences.
+
+Based on the initial observations, three candidate distinctions will be investigated further.
+
+### Distinction 1: Technical Specificity
+
+**Description:** Whether the writer presents a specific technical problem, such as a coding error or debugging issue, or asks a broader question about learning programming.
+
+**Evidence from actual posts:**
+
+- **Post 26 â€” Understanding C++ pointers:** https://www.reddit.com/r/learnprogramming/comments/1hla3ri/ â€” Focuses on an identifiable programming concept: pointers, their purpose, and how they work.
+- **Post 12 â€” Programming career roadmap:** https://www.reddit.com/r/learnprogramming/comments/1weghie/ â€” Requests broad career and learning guidance rather than assistance with a specific programming problem.
+
+### Distinction 2: Post Purpose
+
+**Description:** Whether the writer is requesting assistance, offering advice, or sharing a personal programming experience.
+
+**Evidence from actual posts:**
+
+- **Post 23 â€” Beginner Git and GitHub resources:** https://www.reddit.com/r/learnprogramming/comments/1sr6qck/ â€” Requests tutorials and learning resources.
+- **Post 27 â€” Git tutorial for beginners:** https://www.reddit.com/r/learnprogramming/comments/gh2gn9/ â€” Shares an educational resource and offers guidance rather than requesting assistance.
+- **Post 3 â€” First successful code:** https://www.reddit.com/r/learnprogramming/comments/1vsgs4m/ â€” Shares a personal programming achievement.
+
+### Distinction 3: Supporting Context
+
+**Description:** Whether the writer provides information about previous attempts, error messages, code examples, or other relevant details that help readers understand the discussion.
+
+**Evidence from actual posts:**
+
+- **Post 22 â€” Difficulty learning independently:** https://www.reddit.com/r/learnprogramming/comments/1pmzjoe/ â€” Describes a repeated copy-paste-and-debug workflow, providing context about previous learning attempts.
+- **Post 24 â€” Learning Git from scratch:** https://www.reddit.com/r/learnprogramming/comments/1wlmea9/ â€” Identifies limited experience with version control but, according to the reading log, provides fewer details about previous attempts.
+
+
+## 4. Ambiguous Cases
+
+Some posts demonstrate more than one observable characteristic, making it difficult to describe them using only one distinction.
+
+**Post 21 â€” Perfectionism and programming confidence**
+
+https://www.reddit.com/r/learnprogramming/comments/1kivnvu/
+
+According to the reading log, the writer discusses self-doubt and difficulty starting projects. The post combines personal experience with a request for practical guidance.
+
+**Post 29 â€” Pointer concepts and beginner confusion**
+
+https://www.reddit.com/r/learnprogramming/comments/12xc0rf/
+
+The post concerns a specific technical concept, C++ pointers, but also asks whether feeling overwhelmed is normal. It combines a technical learning question with a personal concern.
+
+**Observation:** Post purpose, technical specificity, and supporting context can overlap. These characteristics should not automatically be treated as mutually exclusive classification labels.
+
+## 5. Conclusions
+
+The 30 posts documented from r/learnprogramming cover several topics, including debugging, programming fundamentals, learning resources, project development, career preparation, and personal programming experiences.
+
+Three candidate distinctions emerged from the recorded observations:
+
+1. **Technical specificity:** Some discussions focus on identifiable programming concepts, while others concern broader learning or career questions.
+2. **Post purpose:** Writers may request assistance, share learning resources, offer advice, or describe personal achievements.
+3. **Supporting context:** Some writers explain their experience, previous attempts, and specific difficulties, while others provide less background information.
+
+The observations also suggest that these characteristics overlap. A writer can ask a specific technical question while sharing personal frustration or describing previous attempts.
+
+These findings provide possible directions for developing the TakeMeter classification taxonomy in Milestone 2. However, the final labels must be clearly defined and mutually exclusive.
+
+No final classification labels have been assigned during Milestone 1.
+
+========================================
+FILE: research\milestone2_taxonomy.md
+========================================
+# TakeMeter â€” Milestone 2: Label Taxonomy
+
+## 1. Selected Community
+
+**Community:** r/learnprogramming  
+**Source:** https://www.reddit.com/r/learnprogramming/  
+**Classification goal:** Classify programming-related posts by the level of relevant supporting context provided by the author.  
+**Research source:** [Milestone 1 Observations](./milestone1_observations.md)
+
+## 2. Label Taxonomy
+
+Evaluate the original post's title and body. Assign exactly one label.
+
+### Label 1: `low_context`
+
+**Definition:** A post asks a question or expresses an opinion or experience without meaningful supporting background that explains the author's specific circumstances.
+
+**Example 1 â€” Post 11: Python versus JavaScript**  
+https://www.reddit.com/r/learnprogramming/comments/1t3f1fi/  
+The author asks why Python is recommended for beginners when React appears in job listings, but gives little information about their own goals or circumstances.
+
+**Example 2 â€” Choosing a first programming language**  
+https://www.reddit.com/r/learnprogramming/comments/vli5zb/  
+The author asks which language makes later languages easier to learn, without explaining previous experience or intended applications. **Note:** This post was added after the original 30-post reading log; it must be read and included in the research log to meet the 'from your reading' requirement.
+
+### Label 2: `some_context`
+
+**Definition:** A post provides at least one relevant supporting detail, such as prior experience, a specific difficulty, or a goal, but does not explain the situation with multiple connected concrete details.
+
+**Example 1 â€” Post 24: Learning Git from scratch**  
+https://www.reddit.com/r/learnprogramming/comments/1wlmea9/  
+The author describes beginner status and asks for Git learning resources, without a specific task or failed attempt.
+
+**Example 2 â€” Post 26: Understanding C++ pointers**  
+https://www.reddit.com/r/learnprogramming/comments/1hla3ri/  
+The author identifies pointers as confusing and mentions previous attempts to understand them, but supplies no specific code example or use case.
+
+### Label 3: `detailed_context`
+
+**Definition:** A post provides multiple concrete, relevant details that connect to one another and substantially explain its central problem, experience, or argument.
+
+**Example 1 â€” Post 6: Python versus JavaScript**  
+https://www.reddit.com/r/learnprogramming/comments/1qc5q4r/  
+The author describes work responsibilities, previous HTML/CSS and JavaScript learning, interests, and competing reasons for choosing a language.
+
+**Example 2 â€” Post 17: Learning software design**  
+https://www.reddit.com/r/learnprogramming/comments/1s4cvsb/  
+The author describes Python and C++ knowledge, success with small scripts, difficulty structuring larger projects, and gaps in computer science knowledge.
+
+## 3. Classification Decision Rules
+
+1. Read the full title and body, not only the title.
+2. Ignore irrelevant details, repetition, post length, emotional intensity, and writing style when deciding how much supporting context exists.
+3. Assign `detailed_context` if multiple concrete, relevant details connect to explain the central issue, experience, or argument.
+4. Otherwise assign `some_context` if at least one meaningful supporting detail is present.
+5. Otherwise assign `low_context`.
+
+Apply the rules in this order so that each post receives exactly one label. Mentioning several technologies without explaining how they relate does not automatically make a post `detailed_context`.
+
+## 4. Hardest Boundary â€” Real Borderline Post
+
+**Competing labels:** `some_context` and `detailed_context`.
+
+**Candidate borderline post â€” Post 22: Difficulty learning independently**  
+https://www.reddit.com/r/learnprogramming/comments/1pmzjoe/
+
+**Case for `some_context`:** Describing a recurring copy/paste/debug cycle identifies a difficulty, but might not provide enough concrete information about what the author tried or where learning broke down.
+
+**Case for `detailed_context`:** If the author connects prior learning habits, attempts to solve problems, and specific consequences, those details may jointly explain the learning difficulty.
+
+**Decision rule:** Assign `detailed_context` only if the post supplies multiple concrete details that *work together* to explain its central situation. If it merely identifies a struggle and general background, assign `some_context`, even when the post is long.
+
+**Borderline adjudication:** Pending direct review of Post 22's full text. The arguments above are based on the Milestone 1 reading-log description, not a verified quotation of the post. Record the final chosen label and the decisive textual evidence after reading it.
+
+## 5. AI-Generated Eight-Case Boundary Stress Test
+
+These eight posts are **hypothetical AI-generated examples**, not Reddit posts. They intentionally sit near label boundaries. The assignments below are proposed applications of the rules, not results of an independent human or group test.
+
+| # | Hypothetical post | Proposed label | Reason / boundary being tested |
+|---|---|---|---|
+| 1 | I'm new to programming and want to make games. Where should I start? | `some_context` | Game development is a relevant goal, but there are no concrete project details. |
+| 2 | Is Python better than JavaScript for someone trying to find a job? | `some_context` | A job-related goal is given, but the situation is otherwise unspecified. |
+| 3 | I keep getting errors in Python and don't know what to do. | `some_context` | Names a language and difficulty, but no error or attempt. |
+| 4 | I've used Python for three months and finished two courses, but I still can't build a project without a tutorial. | `detailed_context` | Duration, completed learning, and the precise independent-work difficulty connect. |
+| 5 | I'm learning React and Python, and I feel stuck and overwhelmed. | `some_context` | Multiple technologies and emotion do not explain a concrete problem. |
+| 6 | I made a React form and the submit button does nothing. I added an `onSubmit` handler, checked the console, and saw no errors. | `detailed_context` | Describes an observable failure and connected troubleshooting steps. |
+| 7 | I studied Git from videos, but branches still confuse me when I work with classmates. | `detailed_context` | Learning method, specific concept, and collaboration situation jointly explain the issue. |
+| 8 | I'm a beginner, I use Windows, and I want to learn C++. Any suggestions? | `some_context` | Several facts are present, but only the learning goal is meaningfully developed. |
+
+### Stress-Test Review
+
+**Proposed distribution:** `low_context`: 0; `some_context`: 5; `detailed_context`: 3. This is intentionally not a balanced sample: the purpose is to challenge the `some_context` / `detailed_context` boundary rather than test obvious examples.
+
+**Likely disagreements:** Cases 4 and 7 may be classified as `some_context` by someone who requires code, error messages, or attempted fixes for a `detailed_context` label. The rule intentionally permits detailed *learning experiences* as well as technical troubleshooting posts, provided the details are connected and explanatory.
+
+**Independent review:** Not yet recorded. Apply the definitions without consulting the proposed labels, record any disagreements, and refine the decision rule if necessary.
+
+## 6. Final Review and Remaining Verification
+
+**Are the labels mutually exclusive?** The ordered decision rules are designed to produce exactly one label per post; real-world consistency remains to be tested during labeling.
+
+**What was clarified?** The distinction between `some_context` and `detailed_context` depends on whether concrete details are connected and explanatory, not on word count or the number of technologies mentioned.
+
+**Solo/group boundary discussion:** The strongest cases for each side of Post 22 are recorded in Section 4. An independent group choice or personal adjudication has not been recorded.
+
+**Taxonomy decision:** Retain `low_context`, `some_context`, and `detailed_context` as the proposed taxonomy. Before declaring Milestone 2 complete, verify the six real examples against their full posts, add the extra low-context post to the reading log, adjudicate Post 22, and independently review the eight boundary cases.
+
+========================================
+FILE: label_definitions.txt
+========================================
+# Your label definitions, one per line, as `label: definition`.
+#
+# Copy these from your README so the baseline is judged on exactly the
+# definitions you wrote. baseline.py reads this file.
+#
+# Delete the examples below and put yours in.
+
+analysis: makes an argument backed by a specific, checkable fact
+hot_take: a confident claim with no support offered
+reaction: an immediate response to something that just happened
+
+========================================
+FILE: RUNNING.md
+========================================
+# Running TakeMeter
+
+Everything about how the starter works.
+
+This pair is different from the last two: **you train a model.** It runs on
+your own machine, in a notebook, from inside this repo. No accounts, no keys,
+nothing hosted.
+
+---
+
+## Before your first class
+
+One setup, one virtual environment, everything in this repo. The
+[environment setup page](../pages/ide_setup) has the per-operating-system
+commands.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python test.py
+```
+
+**`python test.py` passing is what you need before your first session.** It
+checks your Python version against the pins, your disk, your memory, and
+whether the packages import.
+
+**Your disk needs about 9 GB free, up from 2 in the last two pairs.** The baseline model is roughly
+1.6 GB and PyTorch is not small.
+
+**Your machine needs about 6 GB of RAM.** Two things here are memory-hungry:
+`baseline.py` peaks around 1.8 GB loading the zero-shot model, and the training
+run peaks around 2.1 GB. Neither is comfortable beside an editor and a browser
+on a 4 GB machine. `test.py` warns you.
+
+You'll see one `[WARN] Baseline model â€” not downloaded yet`. That's expected in
+unit 5. **Clear it before the unit 6 session** by running `python baseline.py`
+once â€” downloading 1.6 GB during class is not how you want to spend a breakout.
+
+> **No API key and no accounts for this pair.** Nothing here calls a hosted
+> model. The baseline and the training both run on your own machine.
+
+### What you'll be training on
+
+`test.py` tells you, and so does section 1 of the notebook. There are three
+possibilities and all of them work:
+
+| Device | What it means | Speed |
+|---|---|---|
+| `cuda` | An NVIDIA GPU | Under a minute per seed |
+| `mps` | Apple Silicon â€” M1 and later | Fast; much quicker than the CPU path |
+| `cpu` | Everything else | A few minutes per seed. Three seeds is a coffee, not an afternoon |
+
+âš ï¸ **Write down which one you get.** It is part of your result, not a detail
+about your laptop. Two people running the same notebook on the same data with
+the same seed can get different numbers, because different hardware does the
+arithmetic in a slightly different order. Unit 6 asks you to report it beside
+your three seeds, and `results.json` records it for you.
+
+---
+
+## The notebook
+
+`takemeter.ipynb` runs **on your own machine**, from inside this repo.
+
+1. Open it in VS Code (or `jupyter notebook`, if you prefer).
+2. **Pick the kernel: the `.venv` inside this project.** In VS Code that's the
+   selector in the top right. Getting this wrong is the most common way the
+   first cell fails â€” it will say a package isn't installed when it is,
+   because it's looking at a different Python.
+3. Fill in the two lines at the top of section 1's second cell â€” your name and
+   email. They only label your results.
+
+> âš ï¸ **Open it from your repo, not from a copy.** The notebook writes next to
+> your code and expects `labels.csv` to be there. If you open a copy from your
+> Downloads folder, it will tell you so rather than failing strangely.
+
+### It reads and writes this folder
+
+There is nothing to upload and nothing to download. `labels.csv` is already
+here; `results.json`, `test_split.csv` and `results_three_seeds_*.json` land
+here when the notebook writes them.
+
+**Commit them yourself**, the way you commit anything else. Nothing is pushed
+for you.
+
+- Section 5 writes `results.json` and `test_split.csv` â€” **unit 5**
+- Section 6 writes `results_three_seeds_<label>.json` â€” **unit 6**.
+  Set `RUN_LABEL = "after"` in that cell before the Milestone 5 re-run, or the
+  improvement overwrites the numbers you're comparing against.
+
+> **Add rows to `labels.csv` mid-session?** Re-run section 2, which is what
+> reads the file. The notebook holds the data in memory once it has read it.
+
+> **Your edits to the notebook itself are yours to commit too.** `LABELS`, the
+> settings and the seed live in the file â€” if you change them, that's a change
+> to your repo like any other.
+
+### What's in it
+
+| Section | When | What it does |
+|---|---|---|
+| 1. Setup | unit 5 | Reports your device, and confirms it can see your files |
+| 2. Your labels | unit 5 | `LABELS`, the settings, and **the seed** |
+| 3. Split | unit 5 | 70/15/15, stratified |
+| 4. Train | unit 5 | Minutes on a laptop CPU, under one on a GPU |
+| 5. Results | unit 5 | Writes `results.json` and `test_split.csv` |
+| 6. Three seeds | **unit 6** | Retrains three times in one cell |
+| 7. Confusion matrix | **unit 6** | Prints a markdown table to paste |
+
+Sections 6 and 7 are next unit. Nothing in unit 5 needs them.
+
+---
+
+## Your data
+
+`labels.csv` in your repo. Three columns:
+
+| Column | What's in it |
+|---|---|
+| `text` | The whole post. Don't trim it to fit |
+| `label` | One of your labels, spelled **exactly** as in `LABELS` |
+| `note` | `cold` for the 20 you labelled unaided, and a note on any you pre-labelled |
+
+`labels_template.csv` shows the shape. `data/practice_labels.csv` is the set
+used in class â€” 60 posts from a fictional running forum, already labelled, so
+you can run the whole notebook before you have data of your own.
+
+**One file, unsplit.** Don't split it yourself â€” the notebook does the 70/15/15
+split, and splitting twice is how examples leak between training and test.
+
+### The check before training
+
+Section 2's last cell looks for the things that break a run or quietly ruin it:
+
+| It says | What it means |
+|---|---|
+| `[FIX ME] Labels in your CSV that aren't in LABELS` | A spelling or capital mismatch. `Hot_take` and `hot_take` are different |
+| `[FIX ME] 'x' is 78% of your data` | Over the brief's 70% cap. The model will learn to guess it |
+| `[look at] N duplicate posts` | They'll land in different splits and inflate your score. That's leakage |
+| `[look at] Only 12 examples of 'x'` | Its test split will be tiny, so its F1 will jump between seeds |
+| `[look at] 60 rows` | Under the submission floor. Training still runs â€” fine for the practice data |
+
+---
+
+## The baseline â€” unit 6
+
+```bash
+python baseline.py
+python baseline.py --trained results.json
+```
+
+This runs a general model over your posts using **only your label
+definitions**, with no training. It's the fair opponent your fine-tuned model
+has to beat.
+
+**It scores `test_split.csv`** â€” the held-out posts the notebook saved in unit 5,
+the same ones your trained model was measured on. Two numbers from two different
+sets of posts aren't a comparison, which is why it reads that file rather than
+picking its own sample. If the file isn't there it says so, falls back to a
+random sample of `labels.csv`, and tells you to disclose that in your README.
+
+Runs **on your machine**. No account, no key. A few seconds per post, so 30
+posts takes a couple of minutes â€” that slowness is itself part of the finding.
+
+Put your definitions in `label_definitions.txt`, one per line as
+`label: definition`, copied from your README. **The definitions are the prompt** â€”
+they're the entire input the model gets.
+
+Without the file it falls back to bare label names, which is a much weaker
+prompt. Worth doing on purpose once: run it both ways and the gap between the
+two accuracies is what your definitions were worth, measured instead of assumed.
+If you report the bare-names run as your baseline, say so in your README.
+
+The second command adds a Trained column and prints the **Baseline vs.
+Trained** table ready to paste.
+
+---
+
+## The agreement check â€” unit 6
+
+Staff labelled 30 posts under the taxonomy in `data/staff_taxonomy.md`. You
+label the same 30 under **those** definitions â€” not the ones you designed in
+unit 5 â€” and then compare.
+
+```bash
+python agreement.py
+```
+
+Four files. The posts and the rules ship with the starter; only the answers
+come from your TF, and only after yours are done. Posts and labels join on `id`:
+
+| File | Where it comes from |
+|---|---|
+| `data/staff_taxonomy.md` | **Ships in the starter.** The three definitions and the decision rules staff used. Read it first â€” you label under *these*, not your own |
+| `data/staff_posts.csv` | **Ships in the starter.** The 30 posts, no labels |
+| `data/staff_labels.csv` | **Your TF gives you this**, once your own labels are done |
+| `my_staff_labels.csv` | You make it: the same posts, labelled by you, with `text` and `label` columns |
+
+**You label the staff set under the staff taxonomy, not the one you designed in
+unit 5.** Your own taxonomy was yours to invent; this one is somebody else's to
+apply, and whether you can apply a written rule the way its authors did is the
+only evidence you have about whether your own 200 labels were consistent.
+
+Put both staff files in `data/` under those names and the bare command finds
+them. Anywhere else, point at them:
+
+```bash
+python agreement.py --staff-posts posts.csv --staff-labels labels.csv
+```
+
+Posts are matched on their text, so **paste it unchanged**. Retype or trim a
+post and it won't match â€” the script tells you which ones didn't.
+
+It works out the rate and lists every disagreement. **It stops there on
+purpose.** The rate is arithmetic; the adjudication is the graded part, and your
+README has a block to fill in for each one.
+
+> This is the only instrument you have that can tell a labelling problem from a
+> model problem. Milestone 4 asks you to use it as exactly that â€” a label pair
+> you disagreed with staff about, and that your matrix also confuses, is a
+> finding about your labels rather than about the model.
+
+---
+
+## Every command
+
+| Command | What it does |
+|---|---|
+| `python test.py` | Checks your environment |
+| `python baseline.py` | The zero-shot baseline on your held-out posts â€” **unit 6** |
+| `python agreement.py` | Your labels vs. the staff set â€” **unit 6** |
+| `python baseline.py --help` | All the options |
+| Notebook: sections 1â€“5 | Train once, write `results.json` â€” **unit 5** |
+| Notebook: sections 6â€“7 | Three seeds and the matrix â€” **unit 6** |
+
+---
+
+## Which piece goes with which milestone
+
+### Unit 5 â€” the build
+
+| Milestone | What you're doing | Where |
+|---|---|---|
+| 1 | Pick a community and read it | Nothing to run. Read for 20 minutes |
+| 2 | Design your labels | README, **Label Taxonomy** |
+| 3 | Write your criteria | `criteria.md` â€” all five are yours this time |
+| 4 | Collect and label 200 | `labels.csv` |
+| 5 | Run the training | Notebook, sections 1â€“5 |
+| 6 | Write it up | README |
+
+### Unit 6 â€” the test
+
+| Milestone | What you're doing | Where |
+|---|---|---|
+| 1 | Run the baseline | `baseline.py` |
+| 2 | Retrain three times, read the matrix | Notebook, sections 6â€“7 |
+| 3 | Check yourself against the staff labels | `agreement.py` |
+| 4 | Call each criterion, diagnose the misses | README |
+| 5 | Fix one thing and re-run | Notebook, section 6 with `RUN_LABEL = "after"` |
+| 6 | Say what's still broken | README |
+
+---
+
+## Where everything lives
+
+| File | What it does |
+|---|---|
+| `takemeter.ipynb` | The training notebook. Runs here, on your machine |
+| `baseline.py` | The zero-shot baseline. Runs on your machine |
+| `agreement.py` | Your labels against the staff set. **Unit 6** |
+| `criteria.md` | Your five criteria. **You write all five** |
+| `labels.csv` | Your labelled data. **You create this** |
+| `labels_template.csv` | The shape it needs |
+| `label_definitions.txt` | Your definitions, for the baseline |
+| `data/practice_labels.csv` | The 60-post practice set used in class |
+| `data/staff_taxonomy.md` | The staff set's definitions and decision rules. Ships here |
+| `data/staff_posts.csv` | The staff set's 30 posts. Ships here |
+| `data/staff_labels.csv` | The staff set's labels. **Your TF gives you this** |
+| `README.md` | Your submission |
+| `results.json` | Written and committed by the notebook |
+| `test_split.csv` | Your held-out posts, committed by the notebook. `baseline.py` reads it |
+| `results_three_seeds_before.json` | Written and committed in unit 6, section 6 |
+| `results_three_seeds_after.json` | The same cell re-run with `RUN_LABEL = "after"`, in Milestone 5 |
+| `baseline_results.json` | Written by `baseline.py`. **Commit it** |
+| `agreement_results.json` | Written by `agreement.py`. **Commit it** |
+| `my_staff_labels.csv` | Your labels on the staff set. **You create this** |
+
+---
+
+## When something goes wrong
+
+| What you see | What it means |
+|---|---|
+| Section 1 says `cpu` | Correct on most laptops, and fine. A three-seed run is minutes. Nothing to fix |
+| `ModuleNotFoundError` in the notebook | Wrong kernel. Pick the `.venv` inside this project, top right in VS Code |
+| `FileNotFoundError: labels.csv` | Either you haven't created it yet, or the notebook is open from a copy rather than from your repo. Section 1's second cell says which |
+| The machine crawls during training | Close the browser and anything heavy. Training peaks around 2.1 GB |
+| `KeyError` during training | A label in your CSV isn't in `LABELS`. Check capitals and spaces |
+| Training takes an hour | You're on CPU. See the first row |
+| Accuracy swings 15 points between seeds | Your dataset is too small or too lopsided for a stable measure. **That's a diagnosis, not a mistake** â€” write it down |
+| A label's F1 is 0.00 | It probably has almost nothing in the test split. Check the split table |
+| `baseline.py` says no `test_split.csv` | Unit 5's results section never finished. Re-run it, or note in your README that your comparison isn't like-for-like |
+| `baseline.py` is downloading forever | First run only, ~1.6 GB. Do it before class |
+| The baseline is very slow | Expected. A few seconds per post is what no fine-tuning costs at runtime |
+
+The three usual causes when the notebook fails, in order: the kernel is the
+system Python rather than this project's `.venv`, the notebook was opened from
+a copy outside the repo, or a label in your CSV doesn't match `LABELS` exactly.
+
+If none of those fix it, commit your CSV and criteria and write down the error.
+**You have a labelled dataset and a filed standard, which is most of the
+unit's grade.**
+
+---
+
+## A note on committing
+
+At least four new commits in unit 5, four more in unit 6. Your commit history is
+what shows your criteria existed before your results did.
+
+The `results*.json` files are deliberately **not** in `.gitignore`. They're
+evidence the run happened, and so are `test_split.csv` and `labels.csv`. The
+notebook writes them; you commit them, along with `criteria.md`,
+`baseline_results.json` and your README.
+
+**One machine, one repo.** Everything happens here, so there's nothing to pull
+before you push.
+
+**Do not delete and recreate this repository.** You submit the same URL both
+units.
+
+========================================
+DATASET INSPECTION
+========================================
+Total records: 1
+Unique question IDs: 200
+Records with body: 1
+
+
+question_id : 
+title       : 
+link        : 
+tags        : 
+body        : 
+
+
+
+

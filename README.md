@@ -63,7 +63,9 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
-TakeMeter is a text-classification project using public posts from [r/learnprogramming](https://www.reddit.com/r/learnprogramming/). The goal is to train a model to categorize posts according to a consistent, community-specific label taxonomy. Initial research documents 30 posts and examines technical specificity, post purpose, and supporting context as possible distinctions. The final labels will be selected and tested in Milestone 2; no trained classifier is being claimed yet.
+TakeMeter is a text-classification project using public programming questions collected from Stack Overflow through the Stack Exchange API. The classifier is designed to categorize questions by the richness of relevant supporting context provided in their titles and bodies.
+
+The initial community exploration examines 30 questions and identifies four candidate distinctions: problem specificity, technical evidence, troubleshooting history, and environment or constraints. The proposed classification categories are `low_context`, `some_context`, and `detailed_context`. Model training and evaluation will be documented after the labeled dataset is completed.
 
 ---
 ## Label Taxonomy
