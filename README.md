@@ -177,11 +177,11 @@ These three recorded labels were checked against the reviewed dataset. They illu
 
 | Measure                 | Baseline | Trained | Difference |
 | ----------------------- | -------- | ------- | ---------- |
-| Overall accuracy        |   0.500  |  0.700  |  +0.200    |
-| Macro F1                |   0.227  |  0.275  |  +0.047    |
-| F1 — `low_context`      |   0.000  |  0.000  |   0.000    |
-| F1 — `some_context`     |   0.000  |  0.000  |   0.000    |
-| F1 — `detailed_context` |   0.682  |  0.824  |  +0.142    |
+| Overall accuracy        | 0.500    | 0.700   | +0.200     |
+| Macro F1                | 0.227    | 0.275   | +0.047     |
+| F1 — `low_context`      | 0.000    | 0.000   | 0.000      |
+| F1 — `some_context`     | 0.000    | 0.000   | 0.000      |
+| F1 — `detailed_context` | 0.682    | 0.824   | +0.142     |
 
 **What I predicted before I looked:**
 
@@ -202,13 +202,13 @@ However, both models obtained an F1 score of 0.000 for `low_context` and `some_c
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
 
-| Criterion                        | Target                   | Seed 42               | Seed 7                | Seed 2024             | Verdict |
-| -------------------------------- | ------------------------ | --------------------- | --------------------- | --------------------- | ------- |
-| 1. Held-out accuracy             | ≥65%                     | 70%                   | 70%                   | 70%                   | MET     |
-| 2. Per-class F1                  | ≥0.55 for each class     | 0.000 / 0.000 / 0.824 | 0.000 / 0.000 / 0.824 | 0.000 / 0.000 / 0.824 | MISSED  |
+| Criterion                      | Target                   | Seed 42               | Seed 7                | Seed 2024             | Verdict |
+| ------------------------------ | ------------------------ | --------------------- | --------------------- | --------------------- | ------- |
+| 1. Held-out accuracy           | ≥65%                     | 70%                   | 70%                   | 70%                   | MET     |
+| 2. Per-class F1                | ≥0.55 for each class     | 0.000 / 0.000 / 0.824 | 0.000 / 0.000 / 0.824 | 0.000 / 0.000 / 0.824 | MISSED  |
 | 3. Largest dataset label share | ≤60%                     | 70%                   | 70%                   | 70%                   | MISSED  |
-| 4. Independent human agreement   | ≥75% on 20 posts         | Not measured          | Not measured          | Not measured          | PENDING |
-| 5. High-confidence accuracy      | ≥75% at confidence ≥0.80 | Not measured          | Not measured          | Not measured          | PENDING |
+| 4. Independent human agreement | ≥75% on 20 posts         | Not measured          | Not measured          | Not measured          | PENDING |
+| 5. High-confidence accuracy    | ≥75% at confidence ≥0.80 | Not measured          | Not measured          | Not measured          | PENDING |
 
 ### Confusion matrix
 
@@ -223,6 +223,7 @@ However, both models obtained an F1 score of 0.000 for `low_context` and `some_c
 **My biggest off-diagonal number, and what it means:**
 
 <!-- Identify the most frequent confusion and its direction, using actual results. -->
+
 The largest off-diagonal count is 7: seven actual `some_context` posts were incorrectly classified as `detailed_context`. The reverse count is zero. This indicates a directional bias toward the majority class rather than balanced discrimination between the two context levels.
 
 ---
@@ -246,13 +247,13 @@ These results demonstrate that stable accuracy across random seeds does not guar
 <!-- MET or MISSED against the targets. All three seeds must satisfy the
      model-metric targets. -->
 
-| #   | Criterion                     | Target                   | Verdict | How I decided                                                                           |
-| --- | ----------------------------- | ------------------------ | ------- | --------------------------------------------------------------------------------------- |
-| 1   | Held-out accuracy             | ≥65%                     | MET     | All three seeds achieved 70% accuracy.                                                  |
-| 2   | Per-class F1                  | ≥0.55 for each class     | MISSED  | low_context and some_context achieved F1 = 0.000 for every seed.                        |
+| #   | Criterion                   | Target                   | Verdict | How I decided                                                                           |
+| --- | --------------------------- | ------------------------ | ------- | --------------------------------------------------------------------------------------- |
+| 1   | Held-out accuracy           | ≥65%                     | MET     | All three seeds achieved 70% accuracy.                                                  |
+| 2   | Per-class F1                | ≥0.55 for each class     | MISSED  | low_context and some_context achieved F1 = 0.000 for every seed.                        |
 | 3   | Largest dataset label share | ≤60%                     | MISSED  | detailed_context accounts for 140 of 200 labels (70%).                                  |
-| 4   | Independent human agreement   | ≥75% on 20 posts         | PENDING | No completed independent two-person agreement measurement has been documented.          |
-| 5   | High-confidence accuracy      | ≥75% at confidence ≥0.80 | PENDING | Existing summaries do not report the qualifying predictions at the specified threshold. |
+| 4   | Independent human agreement | ≥75% on 20 posts         | PENDING | No completed independent two-person agreement measurement has been documented.          |
+| 5   | High-confidence accuracy    | ≥75% at confidence ≥0.80 | PENDING | Existing summaries do not report the qualifying predictions at the specified threshold. |
 
 **Diagnoses**
 
@@ -263,38 +264,31 @@ These results demonstrate that stable accuracy across random seeds does not guar
 
 ## Agreement Report
 
-<!-- Your rate against the staff set, and every disagreement adjudicated.
-     Label the 30 posts under the STAFF taxonomy in data/staff_taxonomy.md,
-     not your own taxonomy. -->
+### Staff-Label Agreement Results
 
-**Agreement rate:** **_ / 30 = _**%
+I evaluated 30 staff-provided posts using the taxonomy defined in `data/staff_taxonomy.md`. The taxonomy contains three categories: `analysis`, `hot_take`, and `reaction`.
 
-<!-- Every disagreement needs the post, both labels, your evidence-based call,
-     and a classification into a consistency issue, rule gap, or defensible ambiguity. -->
+My reviewed labels matched the staff labels on all 30 posts, producing an agreement rate of **100% (30/30)**.
 
-**Disagreements**
+| Measure        | Result |
+| -------------- | ------ |
+| Posts compared | 30     |
+| Agreements     | 30     |
+| Disagreements  | 0      |
+| Agreement rate | 100%   |
+| Missing posts  | 0      |
 
-**1.**
+### Disagreement Adjudication
 
-> **The post:**
->
-> **Staff said / I said:**
->
-> **My call, and why:**
->
-> **Which pile:**
+There were no disagreements between my reviewed labels and the staff labels. Therefore, no individual disagreement required adjudication.
 
-**2.**
+### Interpretation
 
-> **The post:**
->
-> **Staff said / I said:**
->
-> **My call, and why:**
->
-> **Which pile:**
+The results demonstrate complete agreement with the staff classifications on this particular evaluation set. However, the result does not establish that the taxonomy is unambiguous or that my separate TakeMeter dataset was labeled consistently.
 
-**What the pattern in my disagreements tells me:**
+The labeling process was AI-assisted: I reviewed a proposed set of classifications before saving my final labels. This assistance is a limitation when interpreting the agreement result as evidence of independent human labeling.
+
+The staff-taxonomy exercise is separate from my original TakeMeter acceptance criterion requiring agreement with an independent human rater on 20 posts.
 
 ---
 
@@ -306,13 +300,13 @@ These results demonstrate that stable accuracy across random seeds does not guar
 
 ### Run Log — After
 
-| Criterion                        | Target                   | Seed 42 | Seed 7 | Seed 2024 | Verdict |
-| -------------------------------- | ------------------------ | ------- | ------ | --------- | ------- |
-| 1. Held-out accuracy             | ≥65%                     |         |        |           |         |
-| 2. Per-class F1                  | ≥0.55 for each class     |         |        |           |         |
+| Criterion                      | Target                   | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+| ------------------------------ | ------------------------ | ------- | ------ | --------- | ------- |
+| 1. Held-out accuracy           | ≥65%                     |         |        |           |         |
+| 2. Per-class F1                | ≥0.55 for each class     |         |        |           |         |
 | 3. Largest dataset label share | ≤60%                     |         |        |           |         |
-| 4. Independent human agreement   | ≥75% on 20 posts         |         |        |           |         |
-| 5. High-confidence accuracy      | ≥75% at confidence ≥0.80 |         |        |           |         |
+| 4. Independent human agreement | ≥75% on 20 posts         |         |        |           |         |
+| 5. High-confidence accuracy    | ≥75% at confidence ≥0.80 |         |        |           |         |
 
 **Did it help, and how do I know:**
 
