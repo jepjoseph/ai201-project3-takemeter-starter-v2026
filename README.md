@@ -177,11 +177,11 @@ These three recorded labels were checked against the reviewed dataset. They illu
 
 | Measure                 | Baseline | Trained | Difference |
 | ----------------------- | -------- | ------- | ---------- |
-| Overall accuracy        |          |         |            |
-| Macro F1                |          |         |            |
-| F1 — `low_context`      |          |         |            |
-| F1 — `some_context`     |          |         |            |
-| F1 — `detailed_context` |          |         |            |
+| Overall accuracy        |   0.500  |  0.700  |  +0.200    |
+| Macro F1                |   0.227  |  0.275  |  +0.047    |
+| F1 — `low_context`      |   0.000  |  0.000  |   0.000    |
+| F1 — `some_context`     |   0.000  |  0.000  |   0.000    |
+| F1 — `detailed_context` |   0.682  |  0.824  |  +0.142    |
 
 **What I predicted before I looked:**
 
@@ -196,20 +196,19 @@ I expect the zero-shot baseline to achieve a better macro F1 score than my fine-
 The fine-tuned DistilBERT classifier achieved 70.0% accuracy, outperforming the zero-shot BART baseline by 20 percentage points on the same 30 held-out Stack Overflow questions. Its macro F1 score improved from 0.227 to 0.275.
 
 However, both models obtained an F1 score of 0.000 for `low_context` and `some_context`. The fine-tuned model's improvement came from stronger performance on `detailed_context`, the majority class. These results show that fine-tuning improved overall classification accuracy but did not produce balanced performance across the three context levels.
----
 
 ## Run Log — Before
 
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
 
-| Criterion                        | Target                   | Seed 42 | Seed 7 | Seed 2024 | Verdict |
-| -------------------------------- | ------------------------ | ------- | ------ | --------- | ------- |
-| 1. Held-out accuracy             | ≥65%                     |         |        |           |         |
-| 2. Per-class F1                  | ≥0.55 for each class     |         |        |           |         |
-| 3. Largest predicted label share | ≤60%                     |         |        |           |         |
-| 4. Independent human agreement   | ≥75% on 20 posts         |         |        |           |         |
-| 5. High-confidence accuracy      | ≥75% at confidence ≥0.80 |         |        |           |         |
+| Criterion                        | Target                   | Seed 42               | Seed 7                | Seed 2024             | Verdict |
+| -------------------------------- | ------------------------ | --------------------- | --------------------- | --------------------- | ------- |
+| 1. Held-out accuracy             | ≥65%                     | 70%                   | 70%                   | 70%                   | MET     |
+| 2. Per-class F1                  | ≥0.55 for each class     | 0.000 / 0.000 / 0.824 | 0.000 / 0.000 / 0.824 | 0.000 / 0.000 / 0.824 | MISSED  |
+| 3. Largest dataset label share | ≤60%                     | 70%                   | 70%                   | 70%                   | MISSED  |
+| 4. Independent human agreement   | ≥75% on 20 posts         | Not measured          | Not measured          | Not measured          | PENDING |
+| 5. High-confidence accuracy      | ≥75% at confidence ≥0.80 | Not measured          | Not measured          | Not measured          | PENDING |
 
 ### Confusion matrix
 
@@ -217,28 +216,43 @@ However, both models obtained an F1 score of 0.000 for `low_context` and `some_c
 
 | true \ predicted   | `low_context` | `some_context` | `detailed_context` |
 | ------------------ | ------------: | -------------: | -----------------: |
-| `low_context`      |               |                |                    |
-| `some_context`     |               |                |                    |
-| `detailed_context` |               |                |                    |
+| `low_context`      |             0 |              0 |                  2 |
+| `some_context`     |             0 |              0 |                  7 |
+| `detailed_context` |             0 |              0 |                 21 |
 
 **My biggest off-diagonal number, and what it means:**
 
 <!-- Identify the most frequent confusion and its direction, using actual results. -->
+The largest off-diagonal count is 7: seven actual `some_context` posts were incorrectly classified as `detailed_context`. The reverse count is zero. This indicates a directional bias toward the majority class rather than balanced discrimination between the two context levels.
 
 ---
+
+### Three-Seed Evaluation Findings
+
+I evaluated my fine-tuned DistilBERT classifier using three random seeds: 42, 7, and 2024. Each run used 30 held-out Stack Overflow questions and executed on the CPU.
+
+All three runs achieved 70.0% accuracy and a macro F1 score of approximately 0.275. Although the results were consistent across seeds, the confusion matrices revealed a significant weakness: the classifier predicted `detailed_context` for every test question.
+
+The model achieved an F1 score of approximately 0.824 for `detailed_context`, while both `low_context` and `some_context` received an F1 score of 0.000.
+
+For seed 42, the largest classification error involved seven actual `some_context` questions incorrectly predicted as `detailed_context`. No `detailed_context` questions were predicted as `some_context`.
+
+My dataset contains 140 `detailed_context` questions, 50 `some_context` questions, and only 10 `low_context` questions. This imbalance likely contributed to the classifier's preference for the majority class.
+
+These results demonstrate that stable accuracy across random seeds does not guarantee balanced classification performance. The model appears to have learned a majority-class prediction strategy rather than reliably distinguishing all three levels of context.
 
 ## Verdicts and Diagnoses
 
 <!-- MET or MISSED against the targets. All three seeds must satisfy the
      model-metric targets. -->
 
-| #   | Criterion                     | Target                   | Verdict | How I decided |
-| --- | ----------------------------- | ------------------------ | ------- | ------------- |
-| 1   | Held-out accuracy             | ≥65%                     |         |               |
-| 2   | Per-class F1                  | ≥0.55 for each class     |         |               |
-| 3   | Largest predicted label share | ≤60%                     |         |               |
-| 4   | Independent human agreement   | ≥75% on 20 posts         |         |               |
-| 5   | High-confidence accuracy      | ≥75% at confidence ≥0.80 |         |               |
+| #   | Criterion                     | Target                   | Verdict | How I decided                                                                           |
+| --- | ----------------------------- | ------------------------ | ------- | --------------------------------------------------------------------------------------- |
+| 1   | Held-out accuracy             | ≥65%                     | MET     | All three seeds achieved 70% accuracy.                                                  |
+| 2   | Per-class F1                  | ≥0.55 for each class     | MISSED  | low_context and some_context achieved F1 = 0.000 for every seed.                        |
+| 3   | Largest dataset label share | ≤60%                     | MISSED  | detailed_context accounts for 140 of 200 labels (70%).                                  |
+| 4   | Independent human agreement   | ≥75% on 20 posts         | PENDING | No completed independent two-person agreement measurement has been documented.          |
+| 5   | High-confidence accuracy      | ≥75% at confidence ≥0.80 | PENDING | Existing summaries do not report the qualifying predictions at the specified threshold. |
 
 **Diagnoses**
 
@@ -296,7 +310,7 @@ However, both models obtained an F1 score of 0.000 for `low_context` and `some_c
 | -------------------------------- | ------------------------ | ------- | ------ | --------- | ------- |
 | 1. Held-out accuracy             | ≥65%                     |         |        |           |         |
 | 2. Per-class F1                  | ≥0.55 for each class     |         |        |           |         |
-| 3. Largest predicted label share | ≤60%                     |         |        |           |         |
+| 3. Largest dataset label share | ≤60%                     |         |        |           |         |
 | 4. Independent human agreement   | ≥75% on 20 posts         |         |        |           |         |
 | 5. High-confidence accuracy      | ≥75% at confidence ≥0.80 |         |        |           |         |
 
