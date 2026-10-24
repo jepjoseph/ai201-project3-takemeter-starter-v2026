@@ -187,10 +187,15 @@ These three recorded labels were checked against the reviewed dataset. They illu
 
 <!-- Write the prediction before seeing the trained numbers. -->
 
+I expect the zero-shot baseline to achieve a better macro F1 score than my fine-tuned DistilBERT classifier, particularly for `low_context` and `some_context`. My trained model achieved 70% accuracy but predicted `detailed_context` for every test question. I expect the baseline's label definitions to help it distinguish the three classes, although its overall accuracy may be lower.
+
 **What the gap actually means:**
 
 <!-- Explain what the comparison shows after results are available. -->
 
+The fine-tuned DistilBERT classifier achieved 70.0% accuracy, outperforming the zero-shot BART baseline by 20 percentage points on the same 30 held-out Stack Overflow questions. Its macro F1 score improved from 0.227 to 0.275.
+
+However, both models obtained an F1 score of 0.000 for `low_context` and `some_context`. The fine-tuned model's improvement came from stronger performance on `detailed_context`, the majority class. These results show that fine-tuning improved overall classification accuracy but did not produce balanced performance across the three context levels.
 ---
 
 ## Run Log — Before
