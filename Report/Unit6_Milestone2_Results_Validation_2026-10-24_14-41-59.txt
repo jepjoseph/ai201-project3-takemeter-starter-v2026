@@ -1,0 +1,173 @@
+﻿
+======================================================================
+1. GIT STATUS
+======================================================================
+ M Untitled-1.ipynb
+ M takemeter.ipynb
+?? Report/Unit6_Baseline_Run_2026-10-24_14-27-14.txt
+?? Report/Unit6_Milestone1_Inspection_2026-10-24_14-19-39.txt
+?? Report/Unit6_Milestone2_Notebook_Inspection_2026-10-24_14-40-13.txt
+?? Report/label_definitions_backup_2026-10-24_14-25-28.txt
+
+
+======================================================================
+2. RESULT FILE TRACKING
+======================================================================
+labels.csv
+results.json
+results_three_seeds_before.json
+test_split.csv
+
+
+======================================================================
+3. THREE-SEED RESULTS
+======================================================================
+File: results_three_seeds_before.json
+Number of runs: 3
+
+SEED: 42
+Test samples: 30
+Accuracy: 0.7
+Macro F1: 0.2745098039215686
+Device: cpu
+Max length: 128
+
+PER-LABEL METRICS
+low_context
+  Precision: 0.0
+  Recall: 0.0
+  F1: 0.0
+  Support: 2
+some_context
+  Precision: 0.0
+  Recall: 0.0
+  F1: 0.0
+  Support: 7
+detailed_context
+  Precision: 0.7
+  Recall: 1.0
+  F1: 0.8235294117647058
+  Support: 21
+
+CONFUSION MATRIX
+| True / Predicted | low_context | some_context | detailed_context |
+|---|---:|---:|---:|
+| low_context | 0 | 0 | 2 |
+| some_context | 0 | 0 | 7 |
+| detailed_context | 0 | 0 | 21 |
+
+CONFIDENCE
+{
+    "mean_when_right":  0.6866771578788757,
+    "mean_when_wrong":  0.6530044078826904,
+    "accuracy_most_confident_third":  1.0,
+    "accuracy_least_confident_third":  0.4,
+    "n_per_third":  10
+}
+
+
+SEED: 7
+Test samples: 30
+Accuracy: 0.7
+Macro F1: 0.2745098039215686
+Device: cpu
+Max length: 128
+
+PER-LABEL METRICS
+low_context
+  Precision: 0.0
+  Recall: 0.0
+  F1: 0.0
+  Support: 1
+some_context
+  Precision: 0.0
+  Recall: 0.0
+  F1: 0.0
+  Support: 8
+detailed_context
+  Precision: 0.7
+  Recall: 1.0
+  F1: 0.8235294117647058
+  Support: 21
+
+CONFUSION MATRIX
+| True / Predicted | low_context | some_context | detailed_context |
+|---|---:|---:|---:|
+| low_context | 0 | 0 | 1 |
+| some_context | 0 | 0 | 8 |
+| detailed_context | 0 | 0 | 21 |
+
+CONFIDENCE
+{
+    "mean_when_right":  0.6869993805885315,
+    "mean_when_wrong":  0.6584104895591736,
+    "accuracy_most_confident_third":  0.9,
+    "accuracy_least_confident_third":  0.5,
+    "n_per_third":  10
+}
+
+
+SEED: 2024
+Test samples: 30
+Accuracy: 0.7
+Macro F1: 0.2745098039215686
+Device: cpu
+Max length: 128
+
+PER-LABEL METRICS
+low_context
+  Precision: 0.0
+  Recall: 0.0
+  F1: 0.0
+  Support: 2
+some_context
+  Precision: 0.0
+  Recall: 0.0
+  F1: 0.0
+  Support: 7
+detailed_context
+  Precision: 0.7
+  Recall: 1.0
+  F1: 0.8235294117647058
+  Support: 21
+
+CONFUSION MATRIX
+| True / Predicted | low_context | some_context | detailed_context |
+|---|---:|---:|---:|
+| low_context | 0 | 0 | 2 |
+| some_context | 0 | 0 | 7 |
+| detailed_context | 0 | 0 | 21 |
+
+CONFIDENCE
+{
+    "mean_when_right":  0.706269383430481,
+    "mean_when_wrong":  0.6526799201965332,
+    "accuracy_most_confident_third":  1.0,
+    "accuracy_least_confident_third":  0.4,
+    "n_per_third":  10
+}
+
+
+======================================================================
+4. ORIGINAL UNIT 5 RESULTS
+======================================================================
+Seed: 42
+Accuracy: 0.7
+Macro F1: 0.2745098039215686
+Test samples: 30
+Device: cpu
+
+Seed 42 comparison:
+Accuracy matches: True
+Macro F1 matches: True
+
+======================================================================
+5. DATASET
+======================================================================
+Total rows: 200
+detailed_context: 140
+low_context: 10
+some_context: 50
+
+Dataset SHA256:
+FC8EE4347824DDE777274B4C429CE0994FFB23A7141CAE69D3E30611A72B8368

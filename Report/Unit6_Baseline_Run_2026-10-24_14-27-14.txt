@@ -1,0 +1,78 @@
+﻿Using your definitions from label_definitions.txt.
+Reading the held-out posts from test_split.csv ΓÇö the same ones your
+trained model was scored on.
+
+Classifying 30 posts across 3 labels.
+A few seconds each ΓÇö this is what no fine-tuning costs at runtime.
+
+Loading facebook/bart-large-mnli (first run downloads ~1.6 GB)ΓÇª
+python.exe : D:\FAU\Session Fall 2026\AI201\Project05\ai201-project3-takemeter-starter-v2026\.venv\Lib\site-packages\huggingface_hub\file_download.py:143: UserWarning: `huggingface_hub` cache-system uses 
+symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\karyn\.cache\huggingface\hub\models--facebook--bart-large-mnli. Caching files will still work but in a 
+degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see 
+https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+At line:15 char:1
++ & python baseline.py --trained results.json 2>&1 |
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\FAU\Session ...he#limitations.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: 
+https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or 
+`pip install hf_xet`
+Device set to use cpu
+  1/30
+  2/30
+  3/30
+  4/30
+  5/30
+  6/30
+  7/30
+  8/30
+  9/30
+  10/30
+  11/30
+  12/30
+  13/30
+  14/30
+  15/30
+  16/30
+  17/30
+  18/30
+  19/30
+  20/30
+  21/30
+  22/30
+  23/30
+  24/30
+  25/30
+  26/30
+  27/30
+  28/30
+  29/30
+  30/30
+                              
+accuracy  0.500
+macro F1  0.227
+
+  detailed_context F1 0.682   (n=21)
+  low_context      F1 0.000   (n=2)
+  some_context     F1 0.000   (n=7)
+
+
+Paste this into your README under **Baseline vs. Trained**:
+
+| Measure | Baseline | Trained | Difference |
+|---|---|---|---|
+| Overall accuracy | 0.500 | 0.700 | +0.200 |
+| Macro F1 | 0.227 | 0.275 | +0.047 |
+| F1 ΓÇö `detailed_context` | 0.682 | 0.824 | +0.142 |
+| F1 ΓÇö `low_context` | 0.000 | 0.000 | +0.000 |
+| F1 ΓÇö `some_context` | 0.000 | 0.000 | +0.000 |
+
+Wrote baseline_results.json. Commit it.
+
+Before you look at your trained model's numbers: write one sentence
+predicting where it will beat this. Milestone 1 asks for it, and a
+prediction made after the fact isn't one.

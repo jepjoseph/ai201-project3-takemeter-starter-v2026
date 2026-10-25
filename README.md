@@ -164,6 +164,24 @@ These three recorded labels were checked against the reviewed dataset. They illu
 
 **Pre-labeling disclosure:** The first 20 questions were labeled independently. AI proposed labels for the other 180 questions, but I reviewed the suggestions and retained responsibility for the final labels. AI also assisted with documentation and verification scripts. This process does not constitute independent human agreement testing.
 
+**Moment 3 — Unit 6 evaluation and diagnosis**
+
+- **What I asked for:** Help interpreting the baseline comparison, three-seed results, confusion matrices, acceptance criteria, and confidence statistics.
+- **What came back:** Explanations of accuracy, macro F1, per-class F1, majority-class prediction bias, and the difference between confidence summaries and threshold-specific accuracy. AI also provided read-only PowerShell commands for inspecting the evaluation files.
+- **What I changed:** I ran the evaluations locally, verified the saved JSON results, and used the measured results to determine which criteria were met, missed, or pending.
+
+**Moment 4 — Class-weighted training improvement**
+
+- **What I asked for:** An evidence-based way to address the model's tendency to predict `detailed_context` for every example.
+- **What came back:** A recommendation to use inverse-frequency class-weighted cross-entropy loss and implementation guidance for a custom Hugging Face `WeightedTrainer`.
+- **What I changed:** I updated the notebook, ran the improved model across seeds 42, 7, and 2024, preserved the original results, and compared accuracy, macro F1, per-class F1, and confusion matrices before and after the change.
+
+**Moment 5 — Staff agreement and documentation**
+
+- **What I asked for:** Help applying the staff taxonomy, checking agreement results, and documenting the Unit 6 findings in the required README format.
+- **What came back:** AI-assisted initial labeling suggestions, evaluation commands, explanations of the 30-post agreement results, and draft README responses.
+- **What I changed:** I reviewed the proposed staff labels, ran `agreement.py`, verified 30 agreements and zero disagreements, and documented the limitation that this exercise does not satisfy the independent 20-post TakeMeter agreement criterion. I also checked the README text against the actual experiment results.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
      Don't fill these in during unit 5.
      ═══════════════════════════════════════════════════════════════ -->
@@ -255,11 +273,6 @@ These results demonstrate that stable accuracy across random seeds does not guar
 | 4   | Independent human agreement | ≥75% on 20 posts         | PENDING | No completed independent two-person agreement measurement has been documented.          |
 | 5   | High-confidence accuracy    | ≥75% at confidence ≥0.80 | PENDING | Existing summaries do not report the qualifying predictions at the specified threshold. |
 
-**Diagnoses**
-
-<!-- For each miss: identify the cause and evidence. Use the agreement report
-     to distinguish labeling inconsistency from model limitations. -->
-
 ---
 
 ## Agreement Report
@@ -296,21 +309,37 @@ The staff-taxonomy exercise is separate from my original TakeMeter acceptance cr
 
 **What I changed:**
 
+I implemented one improvement: **inverse-frequency class-weighted cross-entropy loss**. I modified the notebook's `train_model()` function to use a custom Hugging Face `WeightedTrainer` with PyTorch's `CrossEntropyLoss`. Class weights were calculated from each seed's training split using `total_training_examples / (number_of_classes × class_training_examples)`. This increased the penalty for misclassifying underrepresented classes. I kept the same DistilBERT model, three seeds (42, 7, 2024), three epochs, learning rate (`2e-5`), batch size (`16`), and maximum sequence length (`128`). I saved the improved results separately in `results_three_seeds_after.json`, preserving the Before results.
+
 **Which diagnosis pointed at it:**
+
+The Before confusion matrices showed that the model predicted `detailed_context` for every test example across all three seeds. Although accuracy was 70%, macro F1 was only 0.275, and both `low_context` and `some_context` had F1 scores of 0.000. The dataset was also imbalanced: 70% `detailed_context`, 25% `some_context`, and 5% `low_context`. These findings suggested that standard training favored the majority class. Class-weighted loss was selected to make errors on underrepresented classes more costly.
 
 ### Run Log — After
 
-| Criterion                      | Target                   | Seed 42 | Seed 7 | Seed 2024 | Verdict |
-| ------------------------------ | ------------------------ | ------- | ------ | --------- | ------- |
-| 1. Held-out accuracy           | ≥65%                     |         |        |           |         |
-| 2. Per-class F1                | ≥0.55 for each class     |         |        |           |         |
-| 3. Largest dataset label share | ≤60%                     |         |        |           |         |
-| 4. Independent human agreement | ≥75% on 20 posts         |         |        |           |         |
-| 5. High-confidence accuracy    | ≥75% at confidence ≥0.80 |         |        |           |         |
+| Criterion                      | Target                   | Seed 42               | Seed 7                | Seed 2024             | Verdict |
+| ------------------------------ | ------------------------ | --------------------- | --------------------- | --------------------- | ------- |
+| 1. Held-out accuracy           | ≥65%                     | 60.0%                 | 70.0%                 | 73.3%                 | MISSED  |
+| 2. Per-class F1                | ≥0.55 for each class     | 0.000 / 0.522 / 0.686 | 0.000 / 0.556 / 0.780 | 0.000 / 0.533 / 0.837 | MISSED  |
+| 3. Largest dataset label share | ≤60%                     | 70%                   | 70%                   | 70%                   | MISSED  |
+| 4. Independent human agreement | ≥75% on 20 posts         | Not measured          | Not measured          | Not measured          | PENDING |
+| 5. High-confidence accuracy    | ≥75% at confidence ≥0.80 | Not measured          | Not measured          | Not measured          | PENDING |
 
 **Did it help, and how do I know:**
 
-<!-- Explain the change in measured results, even if there was no improvement. -->
+The improvement partially helped. Average macro F1 increased from **0.275 to 0.435**, and `some_context` F1 improved from 0.000 to 0.522–0.556 across the three seeds. Before the improvement, the model predicted only `detailed_context`; afterward, it correctly recognized some `some_context` examples.
+
+However, average accuracy decreased from 70.0% to 67.8%, and seed 42 fell below the required 65% accuracy threshold. The model still never predicted `low_context`, leaving its F1 score at 0.000 for every seed.
+
+The seed 42 After confusion matrix shows the trade-off: six of seven `some_context` examples were correctly classified, but nine `detailed_context` examples were incorrectly predicted as `some_context`.
+
+| true \ predicted   | `low_context` | `some_context` | `detailed_context` |
+| ------------------ | ------------: | -------------: | -----------------: |
+| `low_context`      |             0 |              1 |                  1 |
+| `some_context`     |             0 |              6 |                  1 |
+| `detailed_context` |             0 |              9 |                 12 |
+
+The improvement increased minority-class recognition and macro F1, but it did not resolve the `low_context` problem or satisfy all acceptance criteria.
 
 ---
 
@@ -321,6 +350,32 @@ The staff-taxonomy exercise is separate from my original TakeMeter acceptance cr
 **The gap between what I meant my labels to capture and what the model learned:**
 
 <!-- Use the confusion matrix and evaluation results as evidence. -->
+
+**Criteria still missed, what I would do, and why I stopped:**
+
+**Criterion 1 — Accuracy:** The improved model achieved 60.0% accuracy for seed 42, below the 65% target. I would investigate why the model confused nine `detailed_context` examples with `some_context` and evaluate whether more representative training examples improve stability. I stopped because the assignment required one evidence-based improvement, which I completed and evaluated across three seeds.
+
+**Criterion 2 — Per-class F1:** The model still achieved an F1 score of 0.000 for `low_context` across all seeds. I would collect and carefully label additional `low_context` examples and review the boundary between `low_context` and `some_context`. I stopped after evaluating the single class-weighted training improvement rather than introducing another change without a separate experiment.
+
+**Criterion 3 — Dataset balance:** `detailed_context` still represents 70% of the dataset, exceeding the 60% target. I would expand the dataset with additional `low_context` and `some_context` examples while preserving the existing labels and reviewing borderline cases. I did not modify the dataset during the Before/After experiment because I wanted to isolate the effect of class-weighted loss.
+
+**Criterion 4 — Independent human agreement (pending):** The staff taxonomy exercise achieved 100% agreement on 30 posts, but it did not test the TakeMeter taxonomy. I would ask an independent human rater to label 20 TakeMeter posts without seeing my labels and calculate the agreement rate. This evaluation has not yet been completed.
+
+**Criterion 5 — High-confidence accuracy (pending):** The available results do not identify predictions with maximum class probability ≥0.80. I would save the individual prediction probabilities and calculate the accuracy and qualifying sample count for that threshold separately for each seed. I did not mark this criterion as met because the required evidence is unavailable.
+
+**The gap between what I meant my labels to capture and what the model learned:**
+
+My taxonomy distinguishes questions by the amount and relevance of supporting context. A `low_context` question provides little meaningful background, `some_context` provides useful but incomplete context, and `detailed_context` contains multiple concrete details that explain the problem.
+
+The original model did not learn these distinctions reliably. It predicted `detailed_context` for every test question, producing 70% accuracy because the test data was dominated by that class.
+
+After class-weighted training, the model began recognizing `some_context`, increasing average macro F1 from 0.275 to 0.435. However, it still failed to predict `low_context` and sometimes classified detailed questions as having only some context.
+
+For seed 42, nine actual `detailed_context` questions were incorrectly predicted as `some_context`, while neither of the two `low_context` questions was correctly classified.
+
+The confidence results also showed a trade-off. Mean confidence for correct predictions decreased from approximately 0.69–0.71 before training to 0.37–0.42 afterward. Lower confidence does not automatically mean worse classification, but it suggests that prediction reliability needs further investigation.
+
+Overall, the model partially learned the distinction between `some_context` and `detailed_context`, but it did not reliably learn all three categories.
 
 <!-- ═════════════════════════════════════════════════════════════════════
      SUBMISSION CHECKLIST — unit 5
